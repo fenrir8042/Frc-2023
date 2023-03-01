@@ -18,7 +18,14 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
+import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
+
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
@@ -30,6 +37,8 @@ import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.apriltag.AprilTagDetector;
+
+import java.lang.Math;
 
 
 
@@ -56,6 +65,8 @@ public class Robot extends TimedRobot {
  public static final int kXboxStartButton = 8; 
  public static final int kXboxLeftTrigger = 9; 
  public static final int kXboxRightTrigger = 10; 
+ public static final int kXboxLeftStick = 11;
+ public static final int kXboxRightStick = 12;
 
  public static XboxController xbox; 
 
@@ -104,14 +115,20 @@ public class Robot extends TimedRobot {
 
  
 
+ 
+
 //xbox kontrol
 XboxController xboxController = new XboxController(1);
 
 //mecanum
 MecanumDrive robotadi = new MecanumDrive(ortamotoraq2Srx, ortamotoraq1Srx, extentionWheelTalonSRXontaraf, extentionWheelTalonSRX);
 
-//gyro
+//chassis speed
+ChassisSpeeds speed = new ChassisSpeeds(3.0, -2.0, Math.PI);
+Rotation2d rotation2d = new Rotation2d();
+ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI / 2.0, Rotation2d.fromDegrees(45.0));
 
+//wheelspeed
 
 
 //pnömatik
@@ -204,9 +221,6 @@ private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, 
   public void teleopPeriodic() {
 
 
- 
-
-    
     if(button7.getAsBoolean()) {
 
       solenoid.set(DoubleSolenoid.Value.kForward);
@@ -225,6 +239,20 @@ private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, 
      compressor.close();  //emin değilim
 
     }
+
+    // Locations of the wheels relative to the robot center.
+    Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
+    Translation2d m_frontRightLocation = new Translation2d(0.381, -0.381);
+    Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
+    Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
+
+    // Creating my kinematics object using the wheel locations.
+    MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
+    
+
+
+
+
 
   
 
