@@ -15,7 +15,7 @@ import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -30,7 +30,7 @@ import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
 import edu.wpi.first.wpilibj.motorcontrol.Talon;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
+import edu.wpi.first.wpilibj.GenericHID;
 
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
@@ -93,35 +93,38 @@ public class Robot extends TimedRobot {
  
 
 
- //talon
- Talon ortamotoraq1Srx = new Talon(41);
- Talon ortamotoraq2Srx = new Talon(30);
- Talon extentionWheelTalonSRX = new Talon(31);
- Talon extentionWheelTalonSRXontaraf = new Talon(19);
+ //talon ctre kütüphanesinden tanımlama yapılacak.
+ private Talon ortamotoraq1Srx = new Talon(41);
+ private Talon ortamotoraq2Srx = new Talon(30);
+ private Talon extentionWheelTalonSRX = new Talon(31);
+ private Talon extentionWheelTalonSRXontaraf = new Talon(19);
  
  
- //victorlar 
- VictorSP sagmotor1 = new VictorSP(3);
- VictorSP sagmotor2 = new VictorSP(4);
- VictorSP solmotor1 = new VictorSP(1);
- VictorSP solmotor2 = new VictorSP(2);
+ //victorlar ctre kütüphanesinden tanımlama yapılacak.
+ private VictorSP on_sagmotor = new VictorSP(3);
+ private VictorSP arka_sagmotor = new VictorSP(4);
+ private VictorSP on_solmotor = new VictorSP(1);
+ private VictorSP arka_solmotor = new VictorSP(2);
 
 
  //motorcontroller
  MotorControllerGroup sagmotorlar = new
- MotorControllerGroup(sagmotor1,sagmotor2);
+ MotorControllerGroup(on_sagmotor,arka_sagmotor);
  MotorControllerGroup solmotorlar = new
- MotorControllerGroup(solmotor1,solmotor2);
+ MotorControllerGroup(on_solmotor,arka_solmotor);
 
  
 
- 
+//generichid
+GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
+GenericHID hanGenericHID2 = new GenericHID(kRightYAxis);
+
 
 //xbox kontrol
 XboxController xboxController = new XboxController(1);
 
 //mecanum
-MecanumDrive robotadi = new MecanumDrive(ortamotoraq2Srx, ortamotoraq1Srx, extentionWheelTalonSRXontaraf, extentionWheelTalonSRX);
+MecanumDrive mecanumDrive = new MecanumDrive(ortamotoraq2Srx, ortamotoraq1Srx, extentionWheelTalonSRXontaraf, extentionWheelTalonSRX);
 
 //chassis speed
 ChassisSpeeds speed = new ChassisSpeeds(3.0, -2.0, Math.PI);
@@ -131,10 +134,10 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
 //wheelspeed
 
 
-//pnömatik
+//pnömatik bakılacak!!!
 
 private static Compressor compressor = new Compressor(null);
-private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, kXboxButtonA, kLeftYAxis);
+private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, kXboxButtonA, kLeftYAxis);  
 
 
 
@@ -152,6 +155,8 @@ private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, 
 
   @Override
   public void robotInit() {
+
+
 
     new Thread(() -> {
 
@@ -187,6 +192,7 @@ private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, 
   @Override
   public void disabledPeriodic() {}
 
+  public class Autonomous extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
@@ -203,8 +209,10 @@ private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, 
   public void autonomousPeriodic() {
 
     //tartışılacak
+    mecanumDrive.driveCartesian(0.0, 0.5, 0.0);
 
   }
+}
 
   @Override
   public void teleopInit() {
@@ -219,6 +227,13 @@ private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, 
 
   @Override
   public void teleopPeriodic() {
+
+    //bakılmalı!!!
+    
+            double xSpeed = -joystick.getY();     
+            double ySpeed = -joystick.getX();
+            double zRotation = -joystick.getX();
+            mecanumDrive.driveCartesian(xSpeed, ySpeed, zRotation);
 
 
     if(button7.getAsBoolean()) {
