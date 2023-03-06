@@ -15,6 +15,7 @@ import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
 
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -54,47 +55,29 @@ public class Robot extends TimedRobot {
   Timer timer = new Timer();
 
 
-
+ private static final int kForward = 11;
+ private static final int kReverse = 12;
 
  private static final int kLeftYAxis = 1; //?
  private static final int kRightYAxis = 3; //?
 
- //Xbox Button Constants
- public static final int kXboxButtonA = 1; 
- public static final int kXboxButtonB = 2;
- public static final int kXboxButtonX = 3;  
- public static final int kXboxButtonY = 4; 
- public static final int kXboxLeftBumper = 5; 
- public static final int kXboxRightBumper = 6; 
- public static final int kXboxSelectButton = 7; 
- public static final int kXboxStartButton = 8; 
- public static final int kXboxLeftTrigger = 9; 
- public static final int kXboxRightTrigger = 10; 
- public static final int kXboxLeftStick = 11;
- public static final int kXboxRightStick = 12;
 
- public static XboxController xbox; 
-
- public JoystickButton xboxBtnA, xboxBtnB, xboxBtnX, xboxBtnY, xboxBtnLB, xboxBtnRB, xboxBtnStrt, xboxBtnSelect, xboxBtnLT, xboxBtnRT;
- public Trigger xboxLeftJoystick;
-
- 
 
  Joystick joystick = new Joystick(0);
 
 
- JoystickButton button1 = new JoystickButton(xbox, 1);
- JoystickButton button2 = new JoystickButton(xbox, 2);
- JoystickButton button3 = new JoystickButton(xbox, 3);
- JoystickButton button4 = new JoystickButton(xbox, 4);
- JoystickButton button5 = new JoystickButton(xbox, 5);
- JoystickButton button6 = new JoystickButton(xbox, 6);
- JoystickButton button7 = new JoystickButton(xbox, 7);
- JoystickButton button8 = new JoystickButton(xbox, 8);
- JoystickButton button9 = new JoystickButton(xbox, 9);
- JoystickButton button10 = new JoystickButton(xbox, 10);
- JoystickButton button11 = new JoystickButton(xbox, 11);
- JoystickButton button12 = new JoystickButton(xbox, 12);
+ JoystickButton button1 = new JoystickButton(joystick, 1);
+ JoystickButton button2 = new JoystickButton(joystick, 2);
+ JoystickButton button3 = new JoystickButton(joystick, 3);
+ JoystickButton button4 = new JoystickButton(joystick, 4);
+ JoystickButton button5 = new JoystickButton(joystick, 5);
+ JoystickButton button6 = new JoystickButton(joystick, 6);
+ JoystickButton button7 = new JoystickButton(joystick, 7);
+ JoystickButton button8 = new JoystickButton(joystick, 8);
+ JoystickButton button9 = new JoystickButton(joystick, 9);
+ JoystickButton button10 = new JoystickButton(joystick, 10);
+ JoystickButton button11 = new JoystickButton(joystick, 11);
+ JoystickButton button12 = new JoystickButton(joystick, 12);
  
 
 
@@ -113,12 +96,12 @@ public class Robot extends TimedRobot {
 
 
  //motorcontroller yapilacak
- MotorControllerGroup sagmotorlar = new MotorControllerGroup(null, null);
- MotorControllerGroup solmotorlar = new MotorControllerGroup(null, null);
+ MotorControllerGroup onmotorlar = new MotorControllerGroup(null);
+ MotorControllerGroup arkamotorlar = new MotorControllerGroup(null);
  
 
  //mecanum 
- MecanumDrive mecanumDrive = new MecanumDrive(sagmotorlar, sagmotorlar, solmotorlar, sagmotorlar);
+ MecanumDrive mecanumDrive = new MecanumDrive(arkamotorlar, arkamotorlar, onmotorlar, arkamotorlar);
 
  //generichid
  GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
@@ -139,9 +122,9 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
 
 //pnömatik bakılacak!!!
 
-private static Compressor compressor = new Compressor(null);
-private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, kXboxButtonA, kLeftYAxis);  
-
+private static Solenoid solenoidForward = new Solenoid(null, kForward);
+private static Solenoid solenoidReverse = new Solenoid(null, kReverse);
+private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward, kReverse);
 
 
 
@@ -237,26 +220,8 @@ private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, 
             double ySpeed = -joystick.getX();
             double zRotation = -joystick.getX();
             mecanumDrive.driveCartesian(xSpeed, ySpeed, zRotation);
+            mecanumDrive.drivePolar(ySpeed, rotation2d, zRotation);
 
-
-    if(button7.getAsBoolean()) {
-
-      solenoid.set(DoubleSolenoid.Value.kForward);
-
-    } else if (button8.getAsBoolean()) {
-
-      solenoid.set(DoubleSolenoid.Value.kReverse);
-    } 
-
-    if(button9.getAsBoolean()) {
-
-     compressor.enableDigital(); //emin değilim
-
-    } else if (button10.getAsBoolean()) {
-
-     compressor.close();  //emin değilim
-
-    }
 
     // Locations of the wheels relative to the robot center.
     Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
@@ -267,7 +232,11 @@ private static DoubleSolenoid solenoid = new DoubleSolenoid(kXboxButtonB, null, 
     // Creating my kinematics object using the wheel locations.
     MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
     
-
+    doubleSolenoid.set(DoubleSolenoid.Value.kOff); // Valf kapalı
+    doubleSolenoid.set(DoubleSolenoid.Value.kForward); // İleri valf açık
+    doubleSolenoid.set(DoubleSolenoid.Value.kReverse); // Geri valf açık
+    DoubleSolenoid.Value valfDurumu = doubleSolenoid.get();
+    
 
 
 
