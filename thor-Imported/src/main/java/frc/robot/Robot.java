@@ -27,8 +27,13 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 import edu.wpi.first.wpilibj.drive.RobotDriveBase;
-import edu.wpi.first.wpilibj.motorcontrol.VictorSP;
-import edu.wpi.first.wpilibj.motorcontrol.Talon;
+
+import com.ctre.phoenix.motorcontrol.can.MotControllerJNI;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.GenericHID;
 
@@ -93,38 +98,36 @@ public class Robot extends TimedRobot {
  
 
 
- //talon ctre kütüphanesinden tanımlama yapılacak.
- private Talon ortamotoraq1Srx = new Talon(41);
- private Talon ortamotoraq2Srx = new Talon(30);
- private Talon extentionWheelTalonSRX = new Talon(31);
- private Talon extentionWheelTalonSRXontaraf = new Talon(19);
+ //talon 
+ private TalonSRX ortamotoraq1Srx = new WPI_TalonSRX(41);
+ private TalonSRX ortamotoraq2Srx = new WPI_TalonSRX(30);
+ private TalonSRX extentionWheelTalonSRX = new WPI_TalonSRX(31);
+ private TalonSRX extentionWheelTalonSRXontaraf = new WPI_TalonSRX(19);
  
  
- //victorlar ctre kütüphanesinden tanımlama yapılacak.
- private VictorSP on_sagmotor = new VictorSP(3);
- private VictorSP arka_sagmotor = new VictorSP(4);
- private VictorSP on_solmotor = new VictorSP(1);
- private VictorSP arka_solmotor = new VictorSP(2);
+ //victorlar 
+ private VictorSPX on_sagmotor = new WPI_VictorSPX(3);
+ private VictorSPX arka_sagmotor = new WPI_VictorSPX(4);
+ private VictorSPX on_solmotor = new WPI_VictorSPX(1);
+ private VictorSPX arka_solmotor = new WPI_VictorSPX(2);
 
 
- //motorcontroller
- MotorControllerGroup sagmotorlar = new
- MotorControllerGroup(on_sagmotor,arka_sagmotor);
- MotorControllerGroup solmotorlar = new
- MotorControllerGroup(on_solmotor,arka_solmotor);
-
+ //motorcontroller yapilacak
+ MotorControllerGroup sagmotorlar = new MotorControllerGroup(null, null);
+ MotorControllerGroup solmotorlar = new MotorControllerGroup(null, null);
  
 
-//generichid
-GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
-GenericHID hanGenericHID2 = new GenericHID(kRightYAxis);
+ //mecanum 
+ MecanumDrive mecanumDrive = new MecanumDrive(sagmotorlar, sagmotorlar, solmotorlar, sagmotorlar);
+
+ //generichid
+ GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
+ GenericHID hanGenericHID2 = new GenericHID(kRightYAxis);
 
 
 //xbox kontrol
 XboxController xboxController = new XboxController(1);
 
-//mecanum
-MecanumDrive mecanumDrive = new MecanumDrive(ortamotoraq2Srx, ortamotoraq1Srx, extentionWheelTalonSRXontaraf, extentionWheelTalonSRX);
 
 //chassis speed
 ChassisSpeeds speed = new ChassisSpeeds(3.0, -2.0, Math.PI);
