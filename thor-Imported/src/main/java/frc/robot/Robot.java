@@ -1,11 +1,12 @@
 
+//kütüphaneler
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
-
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -13,12 +14,8 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
-
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
@@ -26,8 +23,6 @@ import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
-
-import edu.wpi.first.wpilibj.drive.RobotDriveBase;
 
 import com.ctre.phoenix.motorcontrol.can.MotControllerJNI;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -120,7 +115,7 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
 //wheelspeed
 
 
-//pnömatik bakılacak!!!
+//pnömatik tanım!!!
 
 private static Solenoid solenoidForward = new Solenoid(null, kForward);
 private static Solenoid solenoidReverse = new Solenoid(null, kReverse);
@@ -223,15 +218,19 @@ private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward
             mecanumDrive.drivePolar(ySpeed, rotation2d, zRotation);
 
 
-    // Locations of the wheels relative to the robot center.
+    // Tekerleklerin robot merkezine göre konumu.
     Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
     Translation2d m_frontRightLocation = new Translation2d(0.381, -0.381);
     Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
     Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
 
-    // Creating my kinematics object using the wheel locations.
+    // tekerlek konumlarına göre kinematik
     MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
     
+    //mecanum hareket
+    
+    
+    //pnomatik
     doubleSolenoid.set(DoubleSolenoid.Value.kOff); // Valf kapalı
     doubleSolenoid.set(DoubleSolenoid.Value.kForward); // İleri valf açık
     doubleSolenoid.set(DoubleSolenoid.Value.kReverse); // Geri valf açık
