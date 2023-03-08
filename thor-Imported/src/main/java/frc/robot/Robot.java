@@ -42,7 +42,6 @@ import edu.wpi.first.apriltag.AprilTagDetector;
 
 import java.lang.Math;
 
-import javax.management.ObjectName;
 
 
 
@@ -87,19 +86,17 @@ public class Robot extends TimedRobot {
  
  
  //victorlar 
- private VictorSPX frontLeftmotor = new WPI_VictorSPX(1);
- private VictorSPX rearLeftmotor = new WPI_VictorSPX(2);
- private VictorSPX frontRightmotor = new WPI_VictorSPX(3);
- private VictorSPX rearRightmotor = new WPI_VictorSPX(4);
-
-
- //motorcontroller yapilacak
- private MotorControllerGroup frontmotorGroup = new MotorControllerGroup(null, null);
+ private WPI_VictorSPX frontLeftmotor = new WPI_VictorSPX(1);
+ private WPI_VictorSPX rearLeftmotor = new WPI_VictorSPX(2);
+ private WPI_VictorSPX frontRightmotor = new WPI_VictorSPX(3);
+ private WPI_VictorSPX rearRightmotor = new WPI_VictorSPX(4);
  
-
- //mecanum 
- MecanumDrive mecanumDrive = new MecanumDrive(frontmotorGroup, frontmotorGroup, frontmotorGroup, frontmotorGroup);
-
+ //motorcontroller yapilacak
+ private final MotorControllerGroup rightcony = new MotorControllerGroup(frontRightmotor, rearRightmotor);
+ private final MotorControllerGroup keftcony = new MotorControllerGroup(frontLeftmotor, rearLeftmotor);   
+ //mecanum   
+ MecanumDrive mecanumDrive = new MecanumDrive(rightcony, keftcony, frontLeftmotor, frontLeftmotor);
+ 
  //generichid
  GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
  GenericHID hanGenericHID2 = new GenericHID(kRightYAxis);
@@ -230,7 +227,7 @@ private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward
     MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
     
     //mecanum hareket
-    
+
 
     
     //pnomatik
