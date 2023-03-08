@@ -30,6 +30,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.GenericHID;
 
@@ -40,6 +41,8 @@ import edu.wpi.first.apriltag.AprilTag;
 import edu.wpi.first.apriltag.AprilTagDetector;
 
 import java.lang.Math;
+
+import javax.management.ObjectName;
 
 
 
@@ -84,19 +87,18 @@ public class Robot extends TimedRobot {
  
  
  //victorlar 
- private VictorSPX on_sagmotor = new WPI_VictorSPX(3);
- private VictorSPX arka_sagmotor = new WPI_VictorSPX(4);
- private VictorSPX on_solmotor = new WPI_VictorSPX(1);
- private VictorSPX arka_solmotor = new WPI_VictorSPX(2);
+ private VictorSPX frontLeftmotor = new WPI_VictorSPX(1);
+ private VictorSPX rearLeftmotor = new WPI_VictorSPX(2);
+ private VictorSPX frontRightmotor = new WPI_VictorSPX(3);
+ private VictorSPX rearRightmotor = new WPI_VictorSPX(4);
 
 
  //motorcontroller yapilacak
- MotorControllerGroup onmotorlar = new MotorControllerGroup(null);
- MotorControllerGroup arkamotorlar = new MotorControllerGroup(null);
+ private MotorControllerGroup frontmotorGroup = new MotorControllerGroup(null, null);
  
 
  //mecanum 
- MecanumDrive mecanumDrive = new MecanumDrive(arkamotorlar, arkamotorlar, onmotorlar, arkamotorlar);
+ MecanumDrive mecanumDrive = new MecanumDrive(frontmotorGroup, frontmotorGroup, frontmotorGroup, frontmotorGroup);
 
  //generichid
  GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
@@ -211,11 +213,11 @@ private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward
 
     //bakılmalı!!!
     
-            double xSpeed = -joystick.getY();     
-            double ySpeed = -joystick.getX();
+            double ySpeed = -joystick.getY();     
+            double x = -joystick.getX();
             double zRotation = -joystick.getX();
-            mecanumDrive.driveCartesian(xSpeed, ySpeed, zRotation);
-            mecanumDrive.drivePolar(ySpeed, rotation2d, zRotation);
+            mecanumDrive.driveCartesian(ySpeed, x, zRotation);
+            mecanumDrive.drivePolar(x, rotation2d, zRotation);
 
 
     // Tekerleklerin robot merkezine göre konumu.
@@ -229,6 +231,7 @@ private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward
     
     //mecanum hareket
     
+
     
     //pnomatik
     doubleSolenoid.set(DoubleSolenoid.Value.kOff); // Valf kapalı
