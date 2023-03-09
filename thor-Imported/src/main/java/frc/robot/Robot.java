@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
-import edu.wpi.first.math.kinematics.MecanumDriveWheelSpeeds;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
@@ -37,8 +36,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
-import edu.wpi.first.apriltag.AprilTag;
-import edu.wpi.first.apriltag.AprilTagDetector;
 
 import java.lang.Math;
 
@@ -116,9 +113,9 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
 
 //pnömatik tanım!!!
 
-private static Solenoid solenoidForward = new Solenoid(null, kForward);
-private static Solenoid solenoidReverse = new Solenoid(null, kReverse);
-private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward, kReverse);
+// private static Solenoid solenoidForward = new Solenoid(null, kForward);
+// private static Solenoid solenoidReverse = new Solenoid(null, kReverse);
+// private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward, kReverse);
 
 
 
@@ -231,10 +228,10 @@ private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward
 
     
     //pnomatik
-    doubleSolenoid.set(DoubleSolenoid.Value.kOff); // Valf kapalı
-    doubleSolenoid.set(DoubleSolenoid.Value.kForward); // İleri valf açık
-    doubleSolenoid.set(DoubleSolenoid.Value.kReverse); // Geri valf açık
-    DoubleSolenoid.Value valfDurumu = doubleSolenoid.get();
+    // doubleSolenoid.set(DoubleSolenoid.Value.kOff); // Valf kapalı
+    // doubleSolenoid.set(DoubleSolenoid.Value.kForward); // İleri valf açık
+    // doubleSolenoid.set(DoubleSolenoid.Value.kReverse); // Geri valf açık
+    // DoubleSolenoid.Value valfDurumu = doubleSolenoid.get();
     
 
 
