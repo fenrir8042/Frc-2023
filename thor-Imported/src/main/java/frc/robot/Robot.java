@@ -14,13 +14,18 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
-
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
+import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.interfaces.Gyro;
+import java.beans.Encoder;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 import com.ctre.phoenix.motorcontrol.can.MotControllerJNI;
@@ -76,23 +81,23 @@ public class Robot extends TimedRobot {
 
 
  //talon 
- private TalonSRX ortamotoraq1Srx = new WPI_TalonSRX(41);
- private TalonSRX ortamotoraq2Srx = new WPI_TalonSRX(30);
- private TalonSRX extentionWheelTalonSRX = new WPI_TalonSRX(31);
- private TalonSRX extentionWheelTalonSRXontaraf = new WPI_TalonSRX(19);
+ private WPI_TalonSRX ortamotoraq1Srx = new WPI_TalonSRX(41);
+ private WPI_TalonSRX ortamotoraq2Srx = new WPI_TalonSRX(30);
+ private WPI_TalonSRX extentionWheelTalonSRX = new WPI_TalonSRX(31);
+ private WPI_TalonSRX extentionWheelTalonSRXontaraf = new WPI_TalonSRX(19);
  
  
  //victorlar 
- private WPI_VictorSPX frontLeftmotor = new WPI_VictorSPX(1);
- private WPI_VictorSPX rearLeftmotor = new WPI_VictorSPX(2);
- private WPI_VictorSPX frontRightmotor = new WPI_VictorSPX(3);
- private WPI_VictorSPX rearRightmotor = new WPI_VictorSPX(4);
+ private WPI_VictorSPX frontLeftmotor = new WPI_VictorSPX(3);
+ private WPI_VictorSPX rearLeftmotor = new WPI_VictorSPX(4);
+ private WPI_VictorSPX frontRightmotor = new WPI_VictorSPX(1);
+ private WPI_VictorSPX rearRightmotor = new WPI_VictorSPX(2);
  
  //motorcontroller yapilacak
  private final MotorControllerGroup rightcony = new MotorControllerGroup(frontRightmotor, rearRightmotor);
- private final MotorControllerGroup keftcony = new MotorControllerGroup(frontLeftmotor, rearLeftmotor);   
+ private final MotorControllerGroup keftcony = new MotorControllerGroup(extentionWheelTalonSRX, rearLeftmotor);   
  //mecanum   
- MecanumDrive mecanumDrive = new MecanumDrive(rightcony, keftcony, frontLeftmotor, frontLeftmotor);
+ MecanumDrive mecanumDrive = new MecanumDrive(rightcony, keftcony, extentionWheelTalonSRX, frontLeftmotor);
  
  //generichid
  GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
@@ -108,8 +113,9 @@ ChassisSpeeds speed = new ChassisSpeeds(3.0, -2.0, Math.PI);
 Rotation2d rotation2d = new Rotation2d();
 ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI / 2.0, Rotation2d.fromDegrees(45.0));
 
-//wheelspeed
-
+//ek donanım
+Gyro m_gyro = new ADXRS450_Gyro(null);
+Encoder encoder = new Encoder();
 
 //pnömatik tanım!!!
 
@@ -127,9 +133,7 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
 
 
   private Object drivetrain;
-
-
-
+//MecanumDrive robot = new MecanumDrive(extentionWheelTalonSRX, rearLeftmotor, frontRightmotor, rearRightmotor);
   @Override
   public void robotInit() {
 
@@ -204,7 +208,7 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
 
   @Override
   public void teleopPeriodic() {
-
+    
     //bakılmalı!!!
     
             double ySpeed = -joystick.getY();     
@@ -216,16 +220,13 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
 
     // Tekerleklerin robot merkezine göre konumu.
     Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
-    Translation2d m_frontRightLocation = new Translation2d(0.381, -0.381);
+    Translation2d m_frontRightLocation = new Translation2d(0.381, 0.381);
     Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
-    Translation2d m_backRightLocation = new Translation2d(-0.381, -0.381);
+    Translation2d m_backRightLocation = new Translation2d(-0.381, 0.381);
 
     // tekerlek konumlarına göre kinematik
     MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
     
-    //mecanum hareket
-
-
     
     //pnomatik
     // doubleSolenoid.set(DoubleSolenoid.Value.kOff); // Valf kapalı
@@ -234,12 +235,10 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
     // DoubleSolenoid.Value valfDurumu = doubleSolenoid.get();
     
 
-
-
-
   
 
-  }
+}
+
 
   @Override
   public void testInit() {
