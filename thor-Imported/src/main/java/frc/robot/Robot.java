@@ -14,17 +14,16 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+
+import edu.wpi.first.wpilibj.PneumaticsBase;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.wpilibj.interfaces.Gyro;
-import java.beans.Encoder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
@@ -114,14 +113,18 @@ Rotation2d rotation2d = new Rotation2d();
 ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI / 2.0, Rotation2d.fromDegrees(45.0));
 
 //ek donanım
-Gyro m_gyro = new ADXRS450_Gyro(null);
-Encoder encoder = new Encoder();
+
 
 //pnömatik tanım!!!
 
 // private static Solenoid solenoidForward = new Solenoid(null, kForward);
 // private static Solenoid solenoidReverse = new Solenoid(null, kReverse);
-// private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward, kReverse);
+//private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward, kReverse);
+
+private final Compressor comp = new Compressor(kForward, null);
+private final DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward, kReverse);
+
+
 
 
 
@@ -203,6 +206,8 @@ Encoder encoder = new Encoder();
     
     }
 
+    comp.close();
+
   }
 
 
@@ -233,6 +238,25 @@ Encoder encoder = new Encoder();
     // doubleSolenoid.set(DoubleSolenoid.Value.kForward); // İleri valf açık
     // doubleSolenoid.set(DoubleSolenoid.Value.kReverse); // Geri valf açık
     // DoubleSolenoid.Value valfDurumu = doubleSolenoid.get();
+
+    if (button7.getAsBoolean()) {
+      doubleSolenoid.set(DoubleSolenoid.Value.kForward);
+    }else if (button8.getAsBoolean()) {
+      doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
+    }
+
+
+    if (button11.getAsBoolean()) {
+      
+      comp.isEnabled();
+
+    }else if (button12.getAsBoolean()) {
+      
+      comp.close();
+      
+    }
+
+
     
 
   
