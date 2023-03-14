@@ -7,21 +7,19 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.subsystems.PneumaticBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.RobotBase;
 
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
 
-import edu.wpi.first.wpilibj.PneumaticsBase;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
 import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -117,21 +115,16 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
 
 //pnömatik tanım!!!
 
-// private static Solenoid solenoidForward = new Solenoid(null, kForward);
-// private static Solenoid solenoidReverse = new Solenoid(null, kReverse);
-//private static DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward, kReverse);
-
-private final Compressor comp = new Compressor(kForward, null);
-private final DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward, kReverse);
-
-
-
 
 
 
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+
+  public static PneumaticBase pb;
+  public static OR or;
+
 
 
 
@@ -140,6 +133,9 @@ private final DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward,
   @Override
   public void robotInit() {
 
+
+    pb = new PneumaticBase();
+    or = new OR();
 
 
     new Thread(() -> {
@@ -167,6 +163,7 @@ private final DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward,
  
   @Override
   public void robotPeriodic() {
+    CommandScheduler.getInstance().run();
 
   }
 
@@ -206,7 +203,6 @@ private final DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward,
     
     }
 
-    comp.close();
 
   }
 
@@ -233,28 +229,6 @@ private final DoubleSolenoid doubleSolenoid = new DoubleSolenoid(null, kForward,
     MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
     
     
-    //pnomatik
-    // doubleSolenoid.set(DoubleSolenoid.Value.kOff); // Valf kapalı
-    // doubleSolenoid.set(DoubleSolenoid.Value.kForward); // İleri valf açık
-    // doubleSolenoid.set(DoubleSolenoid.Value.kReverse); // Geri valf açık
-    // DoubleSolenoid.Value valfDurumu = doubleSolenoid.get();
-
-    if (button7.getAsBoolean()) {
-      doubleSolenoid.set(DoubleSolenoid.Value.kForward);
-    }else if (button8.getAsBoolean()) {
-      doubleSolenoid.set(DoubleSolenoid.Value.kReverse);
-    }
-
-
-    if (button11.getAsBoolean()) {
-      
-      comp.isEnabled();
-
-    }else if (button12.getAsBoolean()) {
-      
-      comp.close();
-      
-    }
 
 
     
