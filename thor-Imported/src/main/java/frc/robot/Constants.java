@@ -15,12 +15,12 @@ package frc.robot;
 public final class Constants {
 
   public static class DrivetrainConstants {
-    public static final int frontRightPort = 1;
+    public static final int frontRightPort = 4;
     public static final int frontLeftPort = 31;
-    public static final int backLeftPort = 4;
-    public static final int backRightPort = 2;
+    public static final int backLeftPort = 41;
+    public static final int backRightPort = 1;
 
-    public static final double distanceTolerance = 1;
+    public static final double distanceTolerance = 1; 
 
     public static final double kP = 0;
     public static final double kI = 0;

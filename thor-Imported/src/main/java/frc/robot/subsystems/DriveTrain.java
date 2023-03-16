@@ -17,15 +17,15 @@ import frc.robot.Constants.DrivetrainConstants;
 
 public class DriveTrain extends SubsystemBase {
 
-  private WPI_TalonSRX frontLeft = new WPI_TalonSRX(DrivetrainConstants.frontRightPort);
-  private WPI_VictorSPX frontRight = new WPI_VictorSPX(DrivetrainConstants.frontLeftPort);
-  private WPI_VictorSPX backLeft = new WPI_VictorSPX(DrivetrainConstants.backLeftPort);
+  private WPI_VictorSPX frontRight = new WPI_VictorSPX(DrivetrainConstants.frontRightPort);
+  private WPI_TalonSRX frontLeft = new WPI_TalonSRX(DrivetrainConstants.frontLeftPort);
+  private WPI_TalonSRX backLeft = new WPI_TalonSRX(DrivetrainConstants.backLeftPort);
   private WPI_VictorSPX backRight = new WPI_VictorSPX(DrivetrainConstants.backRightPort);
 
   private final MotorControllerGroup rightcony = new MotorControllerGroup(frontRight, backRight);
   private final MotorControllerGroup keftcony = new MotorControllerGroup(frontLeft, backLeft);   
 
-  public MecanumDrive mecDrive = new MecanumDrive(rightcony, keftcony, rightcony, keftcony);
+  public MecanumDrive mecDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
 
 
 
@@ -40,16 +40,20 @@ public class DriveTrain extends SubsystemBase {
   }
 
   public void setMecanumPermanent(double y, double x, double rx) {
+    frontLeft.set(y + x + rx);
+    backLeft.set(y - x + rx);
+    frontRight.set(y - x - rx);
+    backRight.set(y + x - rx);
+
     
   }
 
   public void setMecanum(double y, double x, double rx) {
-    //mecDrive.driveCartesian(y, x, rx);
-    // , ahrs.getRotation2d().rotateBy(Rotation2d.fromDegrees(-90))
-    // frontLeft.set(y + x + rx);
-    // backLeft.set(y - x + rx);
-    // frontRight.set(y - x - rx);
-    // backRight.set(y + x - rx);
+     mecDrive.driveCartesian(y, x, rx);
+     frontLeft.set(y + x + rx);
+     backLeft.set(y - x + rx);
+     frontRight.set(y - x - rx);
+     backRight.set(y + x - rx);
 
     SmartDashboard.putNumber("x", x);
     SmartDashboard.putNumber("y", y);
