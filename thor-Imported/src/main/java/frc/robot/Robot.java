@@ -77,24 +77,24 @@ public class Robot extends TimedRobot {
  
 
 
- //talon 
- private WPI_TalonSRX ortamotoraq1Srx = new WPI_TalonSRX(41);
- private WPI_TalonSRX ortamotoraq2Srx = new WPI_TalonSRX(30);
- private WPI_TalonSRX extentionWheelTalonSRX = new WPI_TalonSRX(31);
- private WPI_TalonSRX extentionWheelTalonSRXontaraf = new WPI_TalonSRX(19);
+//talon 
+//  private WPI_TalonSRX ortamotoraq1Srx = new WPI_TalonSRX(41);
+//  private WPI_TalonSRX ortamotoraq2Srx = new WPI_TalonSRX(30);
+//  private WPI_TalonSRX extentionWheelTalonSRX = new WPI_TalonSRX(31);
+//  private WPI_TalonSRX extentionWheelTalonSRXontaraf = new WPI_TalonSRX(19);
  
  
- //victorlar 
- private WPI_VictorSPX frontLeftmotor = new WPI_VictorSPX(3);
- private WPI_VictorSPX rearLeftmotor = new WPI_VictorSPX(4);
- private WPI_VictorSPX frontRightmotor = new WPI_VictorSPX(1);
- private WPI_VictorSPX rearRightmotor = new WPI_VictorSPX(2);
+//  //victorlar 
+//  private WPI_VictorSPX frontLeftmotor = new WPI_VictorSPX(3);
+//  private WPI_VictorSPX rearLeftmotor = new WPI_VictorSPX(4);
+//  private WPI_VictorSPX frontRightmotor = new WPI_VictorSPX(1);
+//  private WPI_VictorSPX rearRightmotor = new WPI_VictorSPX(2);
  
- //motorcontroller yapilacak
- private final MotorControllerGroup rightcony = new MotorControllerGroup(frontRightmotor, rearRightmotor);
- private final MotorControllerGroup keftcony = new MotorControllerGroup(extentionWheelTalonSRX, rearLeftmotor);   
+//  //motorcontroller yapilacak
+//  private final MotorControllerGroup rightcony = new MotorControllerGroup(frontRightmotor, rearRightmotor);
+//  private final MotorControllerGroup keftcony = new MotorControllerGroup(extentionWheelTalonSRX, rearLeftmotor);   
  //mecanum   
- MecanumDrive mecanumDrive = new MecanumDrive(rightcony, keftcony, extentionWheelTalonSRX, frontLeftmotor);
+ //MecanumDrive mecanumDrive = new MecanumDrive(rightcony, keftcony, extentionWheelTalonSRX, frontLeftmotor);
  
  //generichid
  GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
@@ -190,7 +190,7 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
   public void autonomousPeriodic() {
 
     //tartışılacak
-    mecanumDrive.driveCartesian(0.0, 0.5, 0.0);
+    //mecanumDrive.driveCartesian(0.0, 0.5, 0.0);
 
   }
 }
@@ -210,26 +210,26 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
   @Override
   public void teleopPeriodic() {
     
-    //bakılmalı!!!
+    // //bakılmalı!!!
     
-            double ySpeed = -joystick.getY();     
-            double x = -joystick.getX();
-            double zRotation = -joystick.getX();
-            mecanumDrive.driveCartesian(ySpeed, x, zRotation);
-            mecanumDrive.drivePolar(x, rotation2d, zRotation);
+    //         double ySpeed = -joystick.getY();     
+    //         double x = -joystick.getX();
+    //         double zRotation = -joystick.getX();
+    //         mecanumDrive.driveCartesian(ySpeed, x, zRotation);
+    //         mecanumDrive.drivePolar(x, rotation2d, zRotation);
 
 
-    // Tekerleklerin robot merkezine göre konumu.
-    Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
-    Translation2d m_frontRightLocation = new Translation2d(0.381, 0.381);
-    Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
-    Translation2d m_backRightLocation = new Translation2d(-0.381, 0.381);
+    // // Tekerleklerin robot merkezine göre konumu.
+    // Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
+    // Translation2d m_frontRightLocation = new Translation2d(0.381, 0.381);
+    // Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
+    // Translation2d m_backRightLocation = new Translation2d(-0.381, 0.381);
 
-    // tekerlek konumlarına göre kinematik
-    MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
+    // // tekerlek konumlarına göre kinematik
+    // MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
     
     
-
+ 
 
     
 
