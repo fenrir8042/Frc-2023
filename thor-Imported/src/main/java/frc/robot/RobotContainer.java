@@ -7,8 +7,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.MecanumDriveCmd;
+import frc.robot.Constants.OperatorConstants ;
+import frc.robot.Constants.DriverStationConstants;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,13 +24,24 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  final DriveTrain driveSubsystem = new DriveTrain();
+ 
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  // private final MecanumDriveCmd m_autoCommand = new MecanumDriveCmd(driveSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
+   final Joystick joystick1 = new Joystick(3);
+
+    driveSubsystem.setDefaultCommand(
+      new MecanumDriveCmd(
+        driveSubsystem,
+        () -> joystick1.getRawAxis(OperatorConstants.forwardAxis),
+        () -> joystick1.getRawAxis(OperatorConstants.sideAxis),
+        () -> joystick1.getRawAxis(OperatorConstants.rotationAxis),
+        () -> joystick1.getRawAxis(OperatorConstants.scaleAxis)));
+
     configureButtonBindings();
   }
 
@@ -34,15 +51,32 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+     Joystick joystick = new Joystick(0);
+
+
+ JoystickButton button1 = new JoystickButton(joystick, 1);
+ JoystickButton button2 = new JoystickButton(joystick, 2);
+ JoystickButton button3 = new JoystickButton(joystick, 3);
+ JoystickButton button4 = new JoystickButton(joystick, 4);
+ JoystickButton button5 = new JoystickButton(joystick, 5);
+ JoystickButton button6 = new JoystickButton(joystick, 6);
+ JoystickButton button7 = new JoystickButton(joystick, 7);
+ JoystickButton button8 = new JoystickButton(joystick, 8);
+ JoystickButton button9 = new JoystickButton(joystick, 9);
+ JoystickButton button10 = new JoystickButton(joystick, 10);
+ JoystickButton button11 = new JoystickButton(joystick, 11);
+ JoystickButton button12 = new JoystickButton(joystick, 12);
+ 
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
-    return m_autoCommand;
-  }
+//   public Command getAutonomousCommand() {
+//     // An ExampleCommand will run in autonomous
+//     return m_autoCommand;
+//   }
 }

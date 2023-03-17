@@ -60,21 +60,21 @@ public class Robot extends TimedRobot {
 
 
 
- Joystick joystick = new Joystick(0);
+//  Joystick joystick = new Joystick(0);
 
 
- JoystickButton button1 = new JoystickButton(joystick, 1);
- JoystickButton button2 = new JoystickButton(joystick, 2);
- JoystickButton button3 = new JoystickButton(joystick, 3);
- JoystickButton button4 = new JoystickButton(joystick, 4);
- JoystickButton button5 = new JoystickButton(joystick, 5);
- JoystickButton button6 = new JoystickButton(joystick, 6);
- JoystickButton button7 = new JoystickButton(joystick, 7);
- JoystickButton button8 = new JoystickButton(joystick, 8);
- JoystickButton button9 = new JoystickButton(joystick, 9);
- JoystickButton button10 = new JoystickButton(joystick, 10);
- JoystickButton button11 = new JoystickButton(joystick, 11);
- JoystickButton button12 = new JoystickButton(joystick, 12);
+//  JoystickButton button1 = new JoystickButton(joystick, 1);
+//  JoystickButton button2 = new JoystickButton(joystick, 2);
+//  JoystickButton button3 = new JoystickButton(joystick, 3);
+//  JoystickButton button4 = new JoystickButton(joystick, 4);
+//  JoystickButton button5 = new JoystickButton(joystick, 5);
+//  JoystickButton button6 = new JoystickButton(joystick, 6);
+//  JoystickButton button7 = new JoystickButton(joystick, 7);
+//  JoystickButton button8 = new JoystickButton(joystick, 8);
+//  JoystickButton button9 = new JoystickButton(joystick, 9);
+//  JoystickButton button10 = new JoystickButton(joystick, 10);
+//  JoystickButton button11 = new JoystickButton(joystick, 11);
+//  JoystickButton button12 = new JoystickButton(joystick, 12);
  
 
 
@@ -178,7 +178,7 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
    
     if (m_autonomousCommand != null) {
