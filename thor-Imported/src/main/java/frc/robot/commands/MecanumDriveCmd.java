@@ -54,6 +54,6 @@ public class MecanumDriveCmd extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

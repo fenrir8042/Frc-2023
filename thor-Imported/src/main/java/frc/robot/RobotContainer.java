@@ -32,15 +32,15 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-   final Joystick joystick1 = new Joystick(3);
+   final Joystick joystick = new Joystick(0);
 
     driveSubsystem.setDefaultCommand(
       new MecanumDriveCmd(
         driveSubsystem,
-        () -> joystick1.getRawAxis(OperatorConstants.forwardAxis),
-        () -> joystick1.getRawAxis(OperatorConstants.sideAxis),
-        () -> joystick1.getRawAxis(OperatorConstants.rotationAxis),
-        () -> joystick1.getRawAxis(OperatorConstants.scaleAxis)));
+        () -> joystick.getRawAxis(OperatorConstants.forwardAxis),
+        () -> joystick.getRawAxis(OperatorConstants.sideAxis),
+        () -> joystick.getRawAxis(OperatorConstants.rotationAxis),
+        () -> joystick.getRawAxis(OperatorConstants.scaleAxis)));
 
     configureButtonBindings();
   }
@@ -52,21 +52,6 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-     Joystick joystick = new Joystick(0);
-
-
- JoystickButton button1 = new JoystickButton(joystick, 1);
- JoystickButton button2 = new JoystickButton(joystick, 2);
- JoystickButton button3 = new JoystickButton(joystick, 3);
- JoystickButton button4 = new JoystickButton(joystick, 4);
- JoystickButton button5 = new JoystickButton(joystick, 5);
- JoystickButton button6 = new JoystickButton(joystick, 6);
- JoystickButton button7 = new JoystickButton(joystick, 7);
- JoystickButton button8 = new JoystickButton(joystick, 8);
- JoystickButton button9 = new JoystickButton(joystick, 9);
- JoystickButton button10 = new JoystickButton(joystick, 10);
- JoystickButton button11 = new JoystickButton(joystick, 11);
- JoystickButton button12 = new JoystickButton(joystick, 12);
  
   }
 

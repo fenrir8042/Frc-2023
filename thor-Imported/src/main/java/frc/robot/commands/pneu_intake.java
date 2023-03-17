@@ -7,9 +7,9 @@
 // import edu.wpi.first.wpilibj2.command.CommandBase;
 // import frc.robot.Robot;
 
-// public class Arm_outtake extends CommandBase {
-//   /** Creates a new Pneumatic_outtake. */
-//   public Arm_outtake() {
+// public class pneu_intake extends CommandBase {
+//   /** Creates a new PneumaticBase. */
+//   public pneu_intake() {
 //     // Use addRequirements() here to declare subsystem dependencies.
 //   }
 
@@ -17,7 +17,7 @@
 //   @Override
 //   public void initialize() 
 //   {
-//     Robot.pb.outtake();
+//     Robot.pb.intake();
 //   }
 
 //   // Called every time the scheduler runs while the command is scheduled.

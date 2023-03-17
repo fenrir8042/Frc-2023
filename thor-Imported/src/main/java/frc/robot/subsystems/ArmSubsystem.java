@@ -1,39 +1,25 @@
-// package frc.robot.subsystems;
+// Copyright (c) FIRST and other WPILib contributors.
+// Open Source Software; you can modify and/or share it under the terms of
+// the WPILib BSD license file in the root directory of this project.
 
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
-// import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-// import edu.wpi.first.wpilibj2.command.SubsystemBase;
+package frc.robot.subsystems;
 
-// public class ArmSubsystem extends SubsystemBase {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import com.ctre.phoenix.motorcontrol.can.MotControllerJNI;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+public class ArmSubsystem extends SubsystemBase {
 
-//     private DoubleSolenoid arm, claw;
+  private WPI_TalonSRX armTalonSRX = new WPI_TalonSRX(41);
 
-//     public ArmSubsystem() {
-//         arm = new DoubleSolenoid(null, 1, 2);
-//         claw = new DoubleSolenoid(null, 5, 6);
-//     }
+  /** Creates a new ArmSubsystem. */
+  public ArmSubsystem() {}
 
-//     public void intake()
-//     {
-//         claw.set(Value.kReverse);
-//         arm.set(Value.kForward);
-//         claw.set(Value.kForward);
-//         arm.set(Value.kReverse); 
-//     }
-        
-//     public void outtake()
-//     {
-//             arm.set(Value.kForward);
-//             claw.set(Value.kReverse);
-//             arm.set(Value.kReverse);
-//             claw.set(Value.kForward);
-
-//     }
-        
-      
-
-                    
-
-    
-// }
+  @Override
+  public void periodic() {
+    // This method will be called once per scheduler run
+  }
+}

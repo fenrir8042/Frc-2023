@@ -28,8 +28,8 @@ public final class Constants {
 
     // kp 0.2
     public static final double kPVerticalDrive = 0.005;
-    public static final double kIVerticalDrive = 0;
-    public static final double kDVerticalDrive = 0.0002;
+    public static final double kIVerticalDrive = 0.005;
+    public static final double kDVerticalDrive = 0.005;
 
     public static final double kPHorizontalDrive = 0.01;
     public static final double kIHorizontalDrive = 0;

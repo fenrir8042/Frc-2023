@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.commands.MecanumDriveCmd;
+import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -18,13 +19,6 @@ import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
 
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.math.kinematics.MecanumDriveKinematics;
-import edu.wpi.first.math.kinematics.MecanumDriveOdometry;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
 
 import com.ctre.phoenix.motorcontrol.can.MotControllerJNI;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -52,30 +46,6 @@ public class Robot extends TimedRobot {
   Timer timer = new Timer();
 
 
- private static final int kForward = 11;
- private static final int kReverse = 12;
-
- private static final int kLeftYAxis = 1; //?
- private static final int kRightYAxis = 3; //?
-
-
-
-//  Joystick joystick = new Joystick(0);
-
-
-//  JoystickButton button1 = new JoystickButton(joystick, 1);
-//  JoystickButton button2 = new JoystickButton(joystick, 2);
-//  JoystickButton button3 = new JoystickButton(joystick, 3);
-//  JoystickButton button4 = new JoystickButton(joystick, 4);
-//  JoystickButton button5 = new JoystickButton(joystick, 5);
-//  JoystickButton button6 = new JoystickButton(joystick, 6);
-//  JoystickButton button7 = new JoystickButton(joystick, 7);
-//  JoystickButton button8 = new JoystickButton(joystick, 8);
-//  JoystickButton button9 = new JoystickButton(joystick, 9);
-//  JoystickButton button10 = new JoystickButton(joystick, 10);
-//  JoystickButton button11 = new JoystickButton(joystick, 11);
-//  JoystickButton button12 = new JoystickButton(joystick, 12);
- 
 
 
 //talon 
@@ -97,21 +67,10 @@ public class Robot extends TimedRobot {
  //mecanum   
  //MecanumDrive mecanumDrive = new MecanumDrive(rightcony, keftcony, extentionWheelTalonSRX, frontLeftmotor);
  
- //generichid
- GenericHID hanGenericHID = new GenericHID(kLeftYAxis);
- GenericHID hanGenericHID2 = new GenericHID(kRightYAxis);
-
 
 //xbox kontrol
 XboxController xboxController = new XboxController(1);
 
-
-//chassis speed
-ChassisSpeeds speed = new ChassisSpeeds(3.0, -2.0, Math.PI);
-Rotation2d rotation2d = new Rotation2d();
-ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI / 2.0, Rotation2d.fromDegrees(45.0));
-
-//ek donanım
 
 
 //pnömatik tanım!!!
@@ -134,30 +93,8 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
   @Override
   public void robotInit() {
 
-
     // pb = new ArmSubsystem();
     // or = new OR();
-
-
-    new Thread(() -> {
-
-    UsbCamera camera = CameraServer.startAutomaticCapture();
-    camera.setResolution(640, 480);
-
-    CvSink cvSink = CameraServer.getVideo();
-    CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
-
-    Mat source = new Mat();
-    Mat output = new Mat();
-
-    while(!Thread.interrupted()) {
-      cvSink.grabFrame(source);
-      Imgproc.cvtColor(source, output, Imgproc.COLOR_BGR2GRAY);
-      outputStream.putFrame(output);
-    }
-
-    }).start();
-    
     m_robotContainer = new RobotContainer();
   }
 
@@ -211,30 +148,6 @@ ChassisSpeeds speeds = ChassisSpeeds.fromFieldRelativeSpeeds(2.0, 2.0, Math.PI /
   @Override
   public void teleopPeriodic() {
     
-    // //bakılmalı!!!
-    
-    //         double ySpeed = -joystick.getY();     
-    //         double x = -joystick.getX();
-    //         double zRotation = -joystick.getX();
-    //         mecanumDrive.driveCartesian(ySpeed, x, zRotation);
-    //         mecanumDrive.drivePolar(x, rotation2d, zRotation);
-
-
-    // // Tekerleklerin robot merkezine göre konumu.
-    // Translation2d m_frontLeftLocation = new Translation2d(0.381, 0.381);
-    // Translation2d m_frontRightLocation = new Translation2d(0.381, 0.381);
-    // Translation2d m_backLeftLocation = new Translation2d(-0.381, 0.381);
-    // Translation2d m_backRightLocation = new Translation2d(-0.381, 0.381);
-
-    // // tekerlek konumlarına göre kinematik
-    // MecanumDriveKinematics m_kinematics = new MecanumDriveKinematics(m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
-    
-    
-
-    
-
-  
-
 }
 
 
