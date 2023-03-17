@@ -104,6 +104,15 @@ public final class Constants {
     public static final double gyroTurnTolerance = 1;
   }
 
+  public static class invert {
+    public static final boolean frontRightinvert = true;
+    public static final boolean frontLeftinvert = false;
+    public static final boolean rearRightinvert = true;
+    public static final boolean rearLeftinvert = false;
+
+
+  }
+
   public static class ScaleFactorConstants {
     public static double driveScaleFactor = 1;
     public static double turnScaleFactor = 0.8;

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DrivetrainConstants;
+import frc.robot.Constants.invert;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -21,6 +22,8 @@ public class DriveTrain extends SubsystemBase {
   private WPI_TalonSRX frontLeft = new WPI_TalonSRX(DrivetrainConstants.frontLeftPort);
   private WPI_VictorSPX backLeft = new WPI_VictorSPX(DrivetrainConstants.backLeftPort);
   private WPI_VictorSPX backRight = new WPI_VictorSPX(DrivetrainConstants.backRightPort); 
+
+  
 
   
 
@@ -32,7 +35,11 @@ public class DriveTrain extends SubsystemBase {
 
 
   public DriveTrain() {
-
+    frontLeft.setInverted(false);
+    frontRight.setInverted(true);
+    backLeft.setInverted(false);
+    backRight.setInverted(true);
+    
   }
 
 
