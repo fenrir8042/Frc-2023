@@ -71,7 +71,7 @@ public final class Constants {
     public static final int kDriverControllerPort = 3;
     public static final int forwardAxis = 1;
     public static final int sideAxis = 0;
-    public static final int rotationAxis = 3;
+    public static final int rotationAxis = 2;
     public static final int cubePickUpButton = 3;
     public static final int conePickUpButton = 3;
     public static final int cubePlaceTopButton = 3;
@@ -79,7 +79,7 @@ public final class Constants {
     public static final int cubeLineUpButton = 3;
     public static final int coneLineUpButton = 3;
 
-    public static int scaleAxis = 2;
+    public static int scaleAxis = 3;
   }
 
   public static class VisionConstants {
@@ -106,9 +106,9 @@ public final class Constants {
 
   public static class invert {
     public static final boolean frontRightinvert = true;
-    public static final boolean frontLeftinvert = false;
+    public static final boolean frontLeftinvert = true;
     public static final boolean rearRightinvert = true;
-    public static final boolean rearLeftinvert = false;
+    public static final boolean rearLeftinvert = true;
 
 
   }

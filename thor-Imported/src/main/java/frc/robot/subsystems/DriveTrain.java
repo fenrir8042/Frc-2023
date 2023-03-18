@@ -35,9 +35,9 @@ public class DriveTrain extends SubsystemBase {
 
 
   public DriveTrain() {
-    frontLeft.setInverted(false);
+    frontLeft.setInverted(true);
     frontRight.setInverted(true);
-    backLeft.setInverted(false);
+    backLeft.setInverted(true);
     backRight.setInverted(true);
     
   }
@@ -59,10 +59,6 @@ public class DriveTrain extends SubsystemBase {
 
   public void setMecanum(double y, double x, double rx) {
      mecDrive.driveCartesian(y, x, rx);
-     frontLeft.set(y + x + rx);
-     backLeft.set(y - x + rx);
-     frontRight.set(y - x - rx);
-     backRight.set(y + x - rx);
 
     SmartDashboard.putNumber("x", x);
     SmartDashboard.putNumber("y", y);
