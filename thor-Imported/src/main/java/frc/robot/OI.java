@@ -5,13 +5,13 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-// import frc.robot.commands.Arm_intake;
-// import frc.robot.commands.Arm_outtake;
+import frc.robot.commands.pneu_intake;
+import frc.robot.commands.pneu_outtake;
 
 /** Add your docs here. */
 public class OI
 {
-    private Joystick joy;
+    
     private JoystickButton intake, outtake;
 
     public OI()
@@ -37,7 +37,7 @@ public class OI
         // intake = new JoystickButton(joy, 1);
         // outtake = new JoystickButton(joy, 2);
 
-        // intake.whileTrue(new Arm_intake());
-        // outtake.whileTrue(new Arm_outtake());
+        // intake.whileTrue(new pneu_intake());
+        // outtake.whileTrue(new pneu_outtake());
     }
 }

@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-//import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.subsystems.pneumaticSubsystem;
 import frc.robot.commands.MecanumDriveCmd;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -43,30 +44,7 @@ import java.lang.Math;
 
 
 public class Robot extends TimedRobot {
-  Timer timer = new Timer();
-
-
-
-
-//talon 
-//  private WPI_TalonSRX ortamotoraq1Srx = new WPI_TalonSRX(41);
-//  private WPI_TalonSRX ortamotoraq2Srx = new WPI_TalonSRX(30);
-//  private WPI_TalonSRX extentionWheelTalonSRX = new WPI_TalonSRX(31);
-//  private WPI_TalonSRX extentionWheelTalonSRXontaraf = new WPI_TalonSRX(19);
- 
- 
-//  //victorlar 
-//  private WPI_VictorSPX frontLeftmotor = new WPI_VictorSPX(3);
-//  private WPI_VictorSPX rearLeftmotor = new WPI_VictorSPX(4);
-//  private WPI_VictorSPX frontRightmotor = new WPI_VictorSPX(1);
-//  private WPI_VictorSPX rearRightmotor = new WPI_VictorSPX(2);
- 
-//  //motorcontroller yapilacak
-//  private final MotorControllerGroup rightcony = new MotorControllerGroup(frontRightmotor, rearRightmotor);
-//  private final MotorControllerGroup keftcony = new MotorControllerGroup(extentionWheelTalonSRX, rearLeftmotor);   
- //mecanum   
- //MecanumDrive mecanumDrive = new MecanumDrive(rightcony, keftcony, extentionWheelTalonSRX, frontLeftmotor);
- 
+  Timer timer = new Timer(); 
 
 //xbox kontrol
 XboxController xboxController = new XboxController(1);
@@ -82,8 +60,8 @@ XboxController xboxController = new XboxController(1);
 
   private RobotContainer m_robotContainer;
 
-  // public static ArmSubsystem pb;
-  // public static OR or;
+  public static pneumaticSubsystem pb;
+  public static OI or;
 
 
 
@@ -93,8 +71,8 @@ XboxController xboxController = new XboxController(1);
   @Override
   public void robotInit() {
 
-    // pb = new ArmSubsystem();
-    // or = new OR();
+    pb = new pneumaticSubsystem();
+    or = new OI();
     m_robotContainer = new RobotContainer();
   }
 

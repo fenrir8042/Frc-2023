@@ -9,12 +9,15 @@ import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.pneumaticSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.MecanumDriveCmd;
 import frc.robot.Constants.OperatorConstants ;
 import frc.robot.Constants.DriverStationConstants;
+import frc.robot.commands.pneu_intake;
+import frc.robot.commands.pneu_outtake;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -25,6 +28,7 @@ import frc.robot.Constants.DriverStationConstants;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   final DriveTrain driveSubsystem = new DriveTrain();
+  final pneumaticSubsystem pneumaticSubsystem = new pneumaticSubsystem();
  
 
   // private final MecanumDriveCmd m_autoCommand = new MecanumDriveCmd(driveSubsystem);
@@ -52,6 +56,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+   //arm button atanacak. onTrue
+   //pnömatik buton atanacak. 
+   Joystick joystick = new Joystick(0);
+        JoystickButton pneu_intake = new JoystickButton(joystick, 1);
+        JoystickButton pneu_outtake = new JoystickButton(joystick, 2);
+
+        pneu_intake.onTrue(new pneu_intake());
+        pneu_outtake.onTrue(new pneu_outtake());
  
   }
 

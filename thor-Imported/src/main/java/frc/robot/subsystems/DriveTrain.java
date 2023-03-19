@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.invert;
+import edu.wpi.first.wpilibj.AnalogGyro;
 
 public class DriveTrain extends SubsystemBase {
 
@@ -34,10 +35,11 @@ public class DriveTrain extends SubsystemBase {
   
 
 
+
   public DriveTrain() {
     frontLeft.setInverted(true);
-    frontRight.setInverted(true);
-    backLeft.setInverted(true);
+    frontRight.setInverted(false);
+    backLeft.setInverted(false);
     backRight.setInverted(true);
     
   }

@@ -1,39 +1,40 @@
-// package frc.robot.subsystems;
+package frc.robot.subsystems;
 
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
-// import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-// import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-// public class pneumaticSubsystem extends SubsystemBase {
+public class pneumaticSubsystem extends SubsystemBase {
 
 
-//     private DoubleSolenoid arm, claw;
+    private DoubleSolenoid arm, claw;
 
-//     public pneumaticSubsystem() {
-//         arm = new DoubleSolenoid(null, 1, 2);
-//         claw = new DoubleSolenoid(null, 5, 6);
-//     }
+    public pneumaticSubsystem() {
+        arm = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
+        claw = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 5, 6);
+    }
 
-//     public void intake()
-//     {
-//         claw.set(Value.kReverse);
-//         arm.set(Value.kForward);
-//         claw.set(Value.kForward);
-//         arm.set(Value.kReverse); 
-//     }
+    public void intake()
+    {
+        claw.set(Value.kReverse);
+        arm.set(Value.kForward);
+        claw.set(Value.kForward);
+        arm.set(Value.kReverse); 
+    }
         
-//     public void outtake()
-//     {
-//             arm.set(Value.kForward);
-//             claw.set(Value.kReverse);
-//             arm.set(Value.kReverse);
-//             claw.set(Value.kForward);
+    public void outtake()
+    {
+            arm.set(Value.kForward);
+            claw.set(Value.kReverse);
+            arm.set(Value.kReverse);
+            claw.set(Value.kForward);
 
-//     }
+    }
         
       
 
                     
 
     
-// }
+}
