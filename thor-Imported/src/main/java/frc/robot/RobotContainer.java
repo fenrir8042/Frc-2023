@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -28,10 +29,10 @@ import frc.robot.commands.pneu_outtake;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   final DriveTrain driveSubsystem = new DriveTrain();
-  final pneumaticSubsystem pneumaticSubsystem = new pneumaticSubsystem();
+  // final pneumaticSubsystem pneumaticSubsystem = new pneumaticSubsystem();
  
 
-  // private final MecanumDriveCmd m_autoCommand = new MecanumDriveCmd(driveSubsystem);
+  //private final MecanumDriveCmd m_autoCommand = new MecanumDriveCmd(driveSubsystem);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -59,11 +60,12 @@ public class RobotContainer {
    //arm button atanacak. onTrue
    //pnömatik buton atanacak. 
    Joystick joystick = new Joystick(0);
-        JoystickButton pneu_intake = new JoystickButton(joystick, 1);
-        JoystickButton pneu_outtake = new JoystickButton(joystick, 2);
+   JoystickButton pneu_intake = new JoystickButton(joystick, 3);
+   JoystickButton pneu_outtake = new JoystickButton(joystick, 4);
 
-        pneu_intake.onTrue(new pneu_intake());
-        pneu_outtake.onTrue(new pneu_outtake());
+
+   pneu_intake.onTrue(new pneu_intake());
+   pneu_outtake.onTrue(new pneu_outtake());
  
   }
 
@@ -72,8 +74,6 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
-//   public Command getAutonomousCommand() {
-//     // An ExampleCommand will run in autonomous
-//     return m_autoCommand;
-//   }
-}
+   public Command getAutonomousCommand;  }
+     // An ExampleCommand will run in autonomous
+     

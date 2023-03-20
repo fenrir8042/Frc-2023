@@ -37,10 +37,10 @@ public class DriveTrain extends SubsystemBase {
 
 
   public DriveTrain() {
-    frontLeft.setInverted(true);
-    frontRight.setInverted(false);
-    backLeft.setInverted(false);
-    backRight.setInverted(true);
+    frontLeft.setInverted(false);
+    frontRight.setInverted(true);
+    backLeft.setInverted(false );
+    backRight.setInverted(true );
     
   }
 

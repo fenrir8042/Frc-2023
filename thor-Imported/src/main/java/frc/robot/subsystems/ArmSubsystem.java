@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 public class ArmSubsystem extends SubsystemBase {
 
   private WPI_TalonSRX armTalonSRX = new WPI_TalonSRX(41);
+  
 
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {}

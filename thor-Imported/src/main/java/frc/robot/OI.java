@@ -33,11 +33,11 @@ public class OI
 
 
 
-        // joy = new Joystick(0);
-        // intake = new JoystickButton(joy, 1);
-        // outtake = new JoystickButton(joy, 2);
+    
+        intake = new JoystickButton(joystick, 3);
+        outtake = new JoystickButton(joystick , 4);
 
-        // intake.whileTrue(new pneu_intake());
-        // outtake.whileTrue(new pneu_outtake());
+        intake.whileTrue(new pneu_intake());
+        outtake.whileTrue(new pneu_outtake());
     }
 }

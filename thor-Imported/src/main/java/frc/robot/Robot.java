@@ -20,13 +20,6 @@ import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
 
-
-import com.ctre.phoenix.motorcontrol.can.MotControllerJNI;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -71,7 +64,7 @@ XboxController xboxController = new XboxController(1);
   @Override
   public void robotInit() {
 
-    pb = new pneumaticSubsystem();
+   pb = new pneumaticSubsystem();
     or = new OI();
     m_robotContainer = new RobotContainer();
   }
