@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -9,7 +8,6 @@ import frc.robot.Constants;
 
 public class pneumaticSubsystem extends SubsystemBase {
     
-    Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
     DoubleSolenoid intake_solenoid =
     new DoubleSolenoid(
@@ -37,9 +35,7 @@ public class pneumaticSubsystem extends SubsystemBase {
         pneumaticMode = false;
       }
       
-    public void openPneumatic() {
-        pcmCompressor.set();
-    }  
+    
                     
 
     
