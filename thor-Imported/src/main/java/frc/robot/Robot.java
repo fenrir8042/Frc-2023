@@ -8,17 +8,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.subsystems.pneumaticSubsystem;
 import frc.robot.commands.MecanumDriveCmd;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
-
-import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.CvSink;
-import edu.wpi.first.cscore.CvSource;
-import edu.wpi.first.cscore.UsbCamera;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
@@ -26,7 +19,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
-
 
 import java.lang.Math;
 
@@ -53,19 +45,12 @@ XboxController xboxController = new XboxController(1);
 
   private RobotContainer m_robotContainer;
 
-  public static pneumaticSubsystem pb;
-  public static OI or;
-
-
-
 
   private Object drivetrain;
 //MecanumDrive robot = new MecanumDrive(extentionWheelTalonSRX, rearLeftmotor, frontRightmotor, rearRightmotor);
   @Override
   public void robotInit() {
 
-   pb = new pneumaticSubsystem();
-    or = new OI();
     m_robotContainer = new RobotContainer();
   }
 

@@ -1,39 +1,45 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class pneumaticSubsystem extends SubsystemBase {
+    
+    Compressor pcmCompressor = new Compressor(0, PneumaticsModuleType.CTREPCM);
 
+    DoubleSolenoid intake_solenoid =
+    new DoubleSolenoid(
+        
+        PneumaticsModuleType.CTREPCM,
+        Constants.PNEUMATICS.kIntakeSolenoidForwardChannel,
+        Constants.PNEUMATICS.kIntakeSolenoidReverseChannel);
 
-    private DoubleSolenoid arm, claw;
+    public boolean pneumaticMode;
 
     public pneumaticSubsystem() {
-        arm = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 1, 2);
-        claw = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 5, 6);
+        pneumaticMode = true;
     }
 
-    public void intake()
-    {
-        claw.set(Value.kReverse);
-        arm.set(Value.kForward);
-        claw.set(Value.kForward);
-        arm.set(Value.kReverse); 
-    }
-        
-    public void outtake()
-    {
-            arm.set(Value.kForward);
-            claw.set(Value.kReverse);
-            arm.set(Value.kReverse);
-            claw.set(Value.kForward);
+    @Override
+    public void periodic() {}
 
-    }
-        
+    public void pushPneumatic() {
+        intake_solenoid.set(DoubleSolenoid.Value.kForward);
+        pneumaticMode = true;
+      }
+    
+    public void pullPneumatic() {
+        intake_solenoid.set(DoubleSolenoid.Value.kReverse);
+        pneumaticMode = false;
+      }
       
-
+    public void openPneumatic() {
+        pcmCompressor.set();
+    }  
                     
 
     

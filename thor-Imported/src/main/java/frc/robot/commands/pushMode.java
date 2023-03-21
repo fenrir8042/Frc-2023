@@ -5,12 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
+import frc.robot.subsystems.pneumaticSubsystem;
 
-public class pneu_intake extends CommandBase {
-  /** Creates a new PneumaticBase. */
-  public pneu_intake() {
-    // Use addRequirements() here to declare subsystem dependencies.
+public class pushMode extends CommandBase {
+
+  pneumaticSubsystem m_pneumatic;
+
+  public pushMode(pneumaticSubsystem m_pneumatic) {
+    this.m_pneumatic = m_pneumatic;
   }
 
   // Called when the command is initially scheduled.
@@ -20,7 +22,7 @@ public class pneu_intake extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.pb.intake();
+    m_pneumatic.pushPneumatic();
   }
 
   // Called once the command ends or is interrupted.

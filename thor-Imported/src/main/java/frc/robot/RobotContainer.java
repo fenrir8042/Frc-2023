@@ -6,7 +6,6 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.PS4Controller.Button;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -16,9 +15,9 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.MecanumDriveCmd;
 import frc.robot.Constants.OperatorConstants ;
-import frc.robot.Constants.DriverStationConstants;
-import frc.robot.commands.pneu_intake;
-import frc.robot.commands.pneu_outtake;
+import frc.robot.Constants.OI;
+import frc.robot.commands.pushMode;
+import frc.robot.commands.pullMode;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -27,12 +26,27 @@ import frc.robot.commands.pneu_outtake;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  final DriveTrain driveSubsystem = new DriveTrain();
-  // final pneumaticSubsystem pneumaticSubsystem = new pneumaticSubsystem();
- 
+  public static final Joystick stick = new Joystick(Constants.OI.kStickId);
 
+  final DriveTrain driveSubsystem = new DriveTrain();
+  final pneumaticSubsystem pneumaticSubsystem = new pneumaticSubsystem();
+ 
   //private final MecanumDriveCmd m_autoCommand = new MecanumDriveCmd(driveSubsystem);
+
+  private final JoystickButton button1 = new JoystickButton(stick, Constants.OI.button1);
+  private final JoystickButton button2 = new JoystickButton(stick, Constants.OI.button2);
+  private final JoystickButton button3 = new JoystickButton(stick, Constants.OI.button3);
+  private final JoystickButton button4 = new JoystickButton(stick, Constants.OI.button4);
+  private final JoystickButton button5 = new JoystickButton(stick, Constants.OI.button5);
+  private final JoystickButton button6 = new JoystickButton(stick, Constants.OI.button6);
+  private final JoystickButton button7 = new JoystickButton(stick, Constants.OI.button7);
+  private final JoystickButton button8 = new JoystickButton(stick, Constants.OI.button8);
+  private final JoystickButton button9 = new JoystickButton(stick, Constants.OI.button9);
+  private final JoystickButton button10 = new JoystickButton(stick, Constants.OI.button10);
+  private final JoystickButton button11 = new JoystickButton(stick, Constants.OI.button11);
+  private final JoystickButton button12 = new JoystickButton(stick, Constants.OI.button12);
+
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -59,14 +73,10 @@ public class RobotContainer {
   private void configureButtonBindings() {
    //arm button atanacak. onTrue
    //pnömatik buton atanacak. 
-   Joystick joystick = new Joystick(0);
-   JoystickButton pneu_intake = new JoystickButton(joystick, 3);
-   JoystickButton pneu_outtake = new JoystickButton(joystick, 4);
-
-
-   pneu_intake.onTrue(new pneu_intake());
-   pneu_outtake.onTrue(new pneu_outtake());
+   button11.onTrue(new pushMode(pneumaticSubsystem));
+   button12.onTrue(new pullMode(pneumaticSubsystem));
  
+
   }
 
   /**
