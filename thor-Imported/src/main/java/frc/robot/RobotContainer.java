@@ -18,6 +18,9 @@ import frc.robot.Constants.OperatorConstants ;
 import frc.robot.Constants.OI;
 import frc.robot.commands.pushMode;
 import frc.robot.commands.pullMode;
+import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.commands.ArmDownCmd;
+import frc.robot.commands.ArmUpCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -29,6 +32,7 @@ public class RobotContainer {
 
   final DriveTrain driveSubsystem = new DriveTrain();
   final pneumaticSubsystem m_pneumaticSubsystem = new pneumaticSubsystem();
+  final ArmSubsystem m_ArmSubsystem = new ArmSubsystem();
  
   public static final Joystick stick = new Joystick(Constants.OI.kStickId);
 
@@ -72,10 +76,12 @@ public class RobotContainer {
   private void configureButtonBindings() {
     
    //arm button atanacak. onTrue
-   //pnömatik buton atanacak. 
+   button9.whileTrue(new ArmUpCmd(m_ArmSubsystem, 1f));
+   button10.whileTrue(new ArmDownCmd(m_ArmSubsystem, -1f));
+
    button11.whileTrue(new pushMode(m_pneumaticSubsystem));
    button12.whileFalse(new pullMode(m_pneumaticSubsystem));
- 
+   
 
   }
 

@@ -65,7 +65,8 @@ public final class Constants {
 
   public static class ArmConstants {
 
-    public static final int armPort = 19;
+    public static final int armTalonPort = 19;
+    public static final int armSparkPort = 28;
   }
 
   public static class OperatorConstants {

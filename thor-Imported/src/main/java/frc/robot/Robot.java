@@ -102,9 +102,7 @@ XboxController xboxController = new XboxController(1);
 
 
   @Override
-  public void teleopPeriodic() {
-    
-}
+  public void teleopPeriodic() {}
 
 
   @Override
