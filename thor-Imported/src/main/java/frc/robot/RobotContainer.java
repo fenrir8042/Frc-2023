@@ -26,12 +26,11 @@ import frc.robot.commands.pullMode;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  public static final Joystick stick = new Joystick(Constants.OI.kStickId);
 
   final DriveTrain driveSubsystem = new DriveTrain();
-  final pneumaticSubsystem pneumaticSubsystem = new pneumaticSubsystem();
+  final pneumaticSubsystem m_pneumaticSubsystem = new pneumaticSubsystem();
  
-  //private final MecanumDriveCmd m_autoCommand = new MecanumDriveCmd(driveSubsystem);
+  public static final Joystick stick = new Joystick(Constants.OI.kStickId);
 
   private final JoystickButton button1 = new JoystickButton(stick, Constants.OI.button1);
   private final JoystickButton button2 = new JoystickButton(stick, Constants.OI.button2);
@@ -51,15 +50,15 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-   final Joystick joystick = new Joystick(0);
+   final Joystick stick = new Joystick(Constants.OI.kStickId);
 
     driveSubsystem.setDefaultCommand(
       new MecanumDriveCmd(
         driveSubsystem,
-        () -> joystick.getRawAxis(OperatorConstants.forwardAxis),
-        () -> joystick.getRawAxis(OperatorConstants.sideAxis),
-        () -> joystick.getRawAxis(OperatorConstants.rotationAxis),
-        () -> joystick.getRawAxis(OperatorConstants.scaleAxis)));
+        () -> stick.getRawAxis(OperatorConstants.forwardAxis),
+        () -> stick.getRawAxis(OperatorConstants.sideAxis),
+        () -> stick.getRawAxis(OperatorConstants.rotationAxis),
+        () -> stick.getRawAxis(OperatorConstants.scaleAxis)));
 
     configureButtonBindings();
   }
@@ -71,10 +70,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
    //arm button atanacak. onTrue
    //pnömatik buton atanacak. 
-   button11.onTrue(new pushMode(pneumaticSubsystem));
-   button12.onTrue(new pullMode(pneumaticSubsystem));
+   button11.onTrue(new pushMode(m_pneumaticSubsystem));
+   button12.onTrue(new pullMode(m_pneumaticSubsystem));
  
 
   }
