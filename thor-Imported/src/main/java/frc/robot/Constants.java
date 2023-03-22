@@ -65,22 +65,7 @@ public final class Constants {
 
   public static class ArmConstants {
 
-    public static final int extension1 = 9; // left
-    public static final int incline1 = 0;
-    public static final int incline2 = 6;
-    public static final int claw = 7;
-
-    public static final int conePlaceTopExtend = 89;
-    public static final double conePlaceTopIncline = 34;
-
-    public static final int conePlaceMidExtend = 85;
-    public static final int conePlaceMidIncline = 38;
-
-    public static final int conePlaceLowExtend = 45;
-    public static final int conePlaceLowIncline = 38;
-
-    public static final int armMaxAngle = 43;
-    public static final int minAngleAtMaxArmOut = 30;
+    public static final int armPort = 19;
   }
 
   public static class OperatorConstants {

@@ -73,8 +73,8 @@ public class RobotContainer {
     
    //arm button atanacak. onTrue
    //pnömatik buton atanacak. 
-   button11.onTrue(new pushMode(m_pneumaticSubsystem));
-   button12.onTrue(new pullMode(m_pneumaticSubsystem));
+   button11.whileTrue(new pushMode(m_pneumaticSubsystem));
+   button12.whileFalse(new pullMode(m_pneumaticSubsystem));
  
 
   }
