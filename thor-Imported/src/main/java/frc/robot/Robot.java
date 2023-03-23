@@ -24,10 +24,6 @@ import java.lang.Math;
 
 
 
-
-
-
-
 public class Robot extends TimedRobot {
   Timer timer = new Timer(); 
 
@@ -82,10 +78,6 @@ XboxController xboxController = new XboxController(1);
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-
-    //tartışılacak
-    //mecanumDrive.driveCartesian(0.0, 0.5, 0.0);
-
   }
 }
 

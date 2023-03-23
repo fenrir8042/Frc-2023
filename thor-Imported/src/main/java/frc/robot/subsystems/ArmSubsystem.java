@@ -19,11 +19,13 @@ import frc.robot.Constants.ArmConstants;
 
 public class ArmSubsystem extends SubsystemBase {
 
-  private WPI_TalonSRX armTalonSRX = new WPI_TalonSRX(Constants.ArmConstants.armTalonPort);
+  private WPI_TalonSRX m_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.armTalonPort);
   private CANSparkMax m_SparkMax = new CANSparkMax(Constants.ArmConstants.armSparkPort, MotorType.kBrushless);
 
   public boolean armupMode;
   public boolean armdownMode;
+  public boolean centerUp;
+  public boolean centerDown;
 
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {
@@ -38,16 +40,32 @@ public class ArmSubsystem extends SubsystemBase {
     // This method will be called once per scheduler run
   }
 
-  public void armUp() {
+  public void armPush() {
     if (armupMode) {
+      m_TalonSRX.set(0.8f);
+    } else {
+      m_TalonSRX.stopMotor();
+    }
+  }
+
+  public void armPull() {
+    if (armdownMode) {
+      m_TalonSRX.set(-0.7f);
+    } else {
+      m_TalonSRX.stopMotor();
+    }
+  }
+
+  public void centerUp() {
+    if (centerUp) {
       m_SparkMax.set(1f);
     } else {
       m_SparkMax.stopMotor();
     }
   }
 
-  public void armDown() {
-    if (armdownMode) {
+  public void centerDown() {
+    if (centerDown) {
       m_SparkMax.set(-1f);
     } else {
       m_SparkMax.stopMotor();

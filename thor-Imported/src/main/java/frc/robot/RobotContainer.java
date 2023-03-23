@@ -16,11 +16,13 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.MecanumDriveCmd;
 import frc.robot.Constants.OperatorConstants ;
 import frc.robot.Constants.OI;
-import frc.robot.commands.pushMode;
-import frc.robot.commands.pullMode;
+import frc.robot.commands.Arm.ArmDownCmd;
+import frc.robot.commands.Arm.ArmUpCmd;
+import frc.robot.commands.Arm.CenterUp;
+import frc.robot.commands.Arm.CenterDown;
+import frc.robot.commands.Pneumatic.pullMode;
+import frc.robot.commands.Pneumatic.pushMode;
 import frc.robot.subsystems.ArmSubsystem;
-import frc.robot.commands.ArmDownCmd;
-import frc.robot.commands.ArmUpCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -76,8 +78,12 @@ public class RobotContainer {
   private void configureButtonBindings() {
     
    //arm button atanacak. onTrue
-   button9.whileTrue(new ArmUpCmd(m_ArmSubsystem, 1f));
-   button10.whileTrue(new ArmDownCmd(m_ArmSubsystem, -1f));
+   
+   button7.whileTrue(new CenterUp(m_ArmSubsystem, 0.5f));
+   button8.whileTrue(new CenterDown(m_ArmSubsystem, -0.5f));
+
+   button9.whileTrue(new ArmUpCmd(m_ArmSubsystem, 0.8f));
+   button10.whileTrue(new ArmDownCmd(m_ArmSubsystem, -0.7f));
 
    button11.whileTrue(new pushMode(m_pneumaticSubsystem));
    button12.whileFalse(new pullMode(m_pneumaticSubsystem));

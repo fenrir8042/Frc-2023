@@ -2,17 +2,20 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Arm;
 
+import frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.pneumaticSubsystem;
 
-public class pushMode extends CommandBase {
+public class ArmDownCmd extends CommandBase {
+  ArmSubsystem m_ArmSubsystem;
+  double speed;
 
-  pneumaticSubsystem m_pneumatic;
+  public ArmDownCmd(ArmSubsystem m_ArmSubsystem, double speed) {
+    this.m_ArmSubsystem = m_ArmSubsystem;
+    this.speed = speed;
 
-  public pushMode(pneumaticSubsystem m_pneumatic) {
-    this.m_pneumatic = m_pneumatic;
+    addRequirements(m_ArmSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -22,7 +25,7 @@ public class pushMode extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_pneumatic.pushPneumatic();
+    m_ArmSubsystem.armPull();
   }
 
   // Called once the command ends or is interrupted.

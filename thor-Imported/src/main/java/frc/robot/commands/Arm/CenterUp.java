@@ -2,16 +2,16 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.Arm;
 
-import frc.robot.subsystems.ArmSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.ArmSubsystem;
 
-public class ArmDownCmd extends CommandBase {
+public class CenterUp extends CommandBase {
   ArmSubsystem m_ArmSubsystem;
   double speed;
 
-  public ArmDownCmd(ArmSubsystem m_ArmSubsystem, double speed) {
+  public CenterUp(ArmSubsystem m_ArmSubsystem, double speed) {
     this.m_ArmSubsystem = m_ArmSubsystem;
     this.speed = speed;
 
@@ -25,7 +25,7 @@ public class ArmDownCmd extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_ArmSubsystem.armDown();
+    m_ArmSubsystem.centerUp();
   }
 
   // Called once the command ends or is interrupted.
