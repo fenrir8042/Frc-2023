@@ -79,14 +79,14 @@ public class RobotContainer {
     
    //arm button atanacak. onTrue
    
-   button7.whileTrue(new CenterUp(m_ArmSubsystem, 0.5f));
-   button8.whileTrue(new CenterDown(m_ArmSubsystem, -0.5f));
+   button6.whileTrue(new CenterUp(m_ArmSubsystem, 0.5f));
+   button4.whileTrue(new CenterDown(m_ArmSubsystem, -0.5f));
 
-   button9.whileTrue(new ArmUpCmd(m_ArmSubsystem, 0.8f));
-   button10.whileTrue(new ArmDownCmd(m_ArmSubsystem, -0.7f));
+   button5.whileTrue(new ArmUpCmd(m_ArmSubsystem, 0.8f));
+   button3.whileTrue(new ArmDownCmd(m_ArmSubsystem, -0.7f));
 
-   button11.whileTrue(new pushMode(m_pneumaticSubsystem));
-   button12.whileFalse(new pullMode(m_pneumaticSubsystem));
+   button1.whileTrue(new pushMode(m_pneumaticSubsystem));
+   button2.whileTrue(new pullMode(m_pneumaticSubsystem));
    
 
   }
