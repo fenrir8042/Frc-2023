@@ -4,9 +4,8 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+// import com.revrobotics.CANSparkMax;
+// import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.MotControllerJNI;
@@ -14,14 +13,21 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 
 import frc.robot.Constants;
 import frc.robot.Constants.ArmConstants;
 
 public class ArmSubsystem extends SubsystemBase {
 
-  private WPI_TalonSRX m_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.armTalonPort);
-  private CANSparkMax m_SparkMax = new CANSparkMax(Constants.ArmConstants.armSparkPort, MotorType.kBrushless);
+  private WPI_TalonSRX a_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.armTalonPort);
+  private WPI_TalonSRX c_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort1);
+  private WPI_TalonSRX s_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort2);
+  //private CANSparkMax m_CanSparkMax = new CANSparkMax(Constants.ArmConstants.centerSpark, MotorType.kBrushless);
+
+
+  private final MotorControllerGroup c_ControllerGroup = new MotorControllerGroup(c_TalonSRX, s_TalonSRX);
+  
 
   public boolean armupMode;
   public boolean armdownMode;
@@ -43,33 +49,33 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void armPush() {
     if (armupMode) {
-      m_TalonSRX.set(0.8f);
+      a_TalonSRX.set(1f);
     } else {
-      m_TalonSRX.stopMotor();
+      a_TalonSRX.stopMotor();
     }
   }
 
   public void armPull() {
     if (armdownMode) {
-      m_TalonSRX.set(-0.7f);
+      a_TalonSRX.set(-1f);
     } else {
-      m_TalonSRX.stopMotor();
+      a_TalonSRX.stopMotor();
     }
   }
 
   public void centerUp() {
     if (centerUp) {
-      m_SparkMax.set(1f);
+      c_ControllerGroup.set(1f);
     } else {
-      m_SparkMax.stopMotor();
+      c_ControllerGroup.stopMotor();
     }
   }
 
   public void centerDown() {
     if (centerDown) {
-      m_SparkMax.set(-1f);
+      c_ControllerGroup.set(-1f);
     } else {
-      m_SparkMax.stopMotor();
+      c_ControllerGroup.stopMotor();
     }
   }
-}
+ }

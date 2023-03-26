@@ -24,9 +24,6 @@ public class DriveTrain extends SubsystemBase {
   private WPI_VictorSPX backLeft = new WPI_VictorSPX(DrivetrainConstants.backLeftPort);
   private WPI_VictorSPX backRight = new WPI_VictorSPX(DrivetrainConstants.backRightPort); 
 
-  
-
-  
 
   private final MotorControllerGroup rightcony = new MotorControllerGroup(frontRight, backRight);
   private final MotorControllerGroup keftcony = new MotorControllerGroup(frontLeft, backLeft);   
@@ -34,13 +31,11 @@ public class DriveTrain extends SubsystemBase {
   public MecanumDrive mecDrive = new MecanumDrive(frontLeft, backLeft, frontRight, backRight);
   
 
-
-
   public DriveTrain() {
     frontLeft.setInverted(false);
     frontRight.setInverted(true);
-    backLeft.setInverted(false );
-    backRight.setInverted(true );
+    backLeft.setInverted(false);
+    backRight.setInverted(true);
     
   }
 

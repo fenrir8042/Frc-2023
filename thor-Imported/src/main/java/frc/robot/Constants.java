@@ -66,7 +66,10 @@ public final class Constants {
   public static class ArmConstants {
 
     public static final int armTalonPort = 19;
-    public static final int armSparkPort = 28;
+    public static final int centerTalonPort1 = 41;
+    public static final int centerTalonPort2 = 30;
+    public static final int centerSpark = 28;
+
   }
 
   public static class OperatorConstants {
@@ -149,8 +152,9 @@ public final class Constants {
   
   public static class PNEUMATICS {
 
-    public static final int kIntakeSolenoidForwardChannel = 3;
-    public static final int kIntakeSolenoidReverseChannel = 2;
+    public static final int kIntakeSolenoidForwardChannel = 0;
+    public static final int kIntakeSolenoidReverseChannel = 1;
+    public static final int CTREPCM = 15;
 
   }
 
