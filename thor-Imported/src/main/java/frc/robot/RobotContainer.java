@@ -20,6 +20,8 @@ import frc.robot.commands.Arm.ArmDownCmd;
 import frc.robot.commands.Arm.ArmUpCmd;
 import frc.robot.commands.Arm.CenterUp;
 import frc.robot.commands.Arm.CenterDown;
+import frc.robot.commands.Arm.balanceCmd;
+import frc.robot.commands.Arm.motorStopCmd;
 import frc.robot.commands.Pneumatic.pullMode;
 import frc.robot.commands.Pneumatic.pushMode;
 import frc.robot.subsystems.ArmSubsystem;
@@ -76,19 +78,22 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    
-   //arm button atanacak. onTrue
-   
-   button5.onTrue(new CenterUp(m_ArmSubsystem, 0.8f));
+       
+   button5.onTrue(new CenterUp(m_ArmSubsystem,0.8f));
    button3.onTrue(new CenterDown(m_ArmSubsystem, -0.8f));
+   button7.onTrue(new motorStopCmd(m_ArmSubsystem, 0));
+   button8.onTrue(new balanceCmd(m_ArmSubsystem, 0.05f));
 
-   button6.onTrue(new ArmUpCmd(m_ArmSubsystem, 1f));
-   button4.onTrue(new ArmDownCmd(m_ArmSubsystem, -1f));
+   button6.whileTrue(new ArmUpCmd(m_ArmSubsystem, 1f));
+   button4.whileTrue(new ArmDownCmd(m_ArmSubsystem, -1f));
 
    button1.whileTrue(new pushMode(m_pneumaticSubsystem));
    button2.whileTrue(new pullMode(m_pneumaticSubsystem));
    
 
+  }
+
+  private void getClass(ArmSubsystem m_ArmSubsystem2) {
   }
 
   /**

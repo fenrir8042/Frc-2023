@@ -79,6 +79,7 @@ XboxController xboxController = new XboxController(1);
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+
   }
 }
 
@@ -95,7 +96,9 @@ XboxController xboxController = new XboxController(1);
 
 
   @Override
-  public void teleopPeriodic() {}
+  public void teleopPeriodic() {
+    
+  }
 
 
   @Override

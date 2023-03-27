@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.RelativeEncoder;
 
 
@@ -46,8 +47,8 @@ public class ArmSubsystem extends SubsystemBase {
     armdownMode = true;
 
     centerUpMode = true;
-    centerDownMode =false;
-    centerUpMode = false;
+    centerDownMode =true;
+    centerUpMode = true;
     centerDownMode =true;
   }
 
@@ -74,17 +75,21 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void centerUp() {
     if (centerUpMode) {
-      m_CanSparkMax.set(1f);
-    } else {
-      m_CanSparkMax.stopMotor();
-    }
+      m_CanSparkMax.set(0.8f);
+    } 
   }
 
   public void centerDown() {
     if (centerDownMode) {
-      m_CanSparkMax.set(-1f);
-    } else {
-      m_CanSparkMax.stopMotor();
-    }
+      m_CanSparkMax.set(-0.8f);
+    } 
+  }
+
+  public void stopMotor() {
+    m_CanSparkMax.stopMotor();
+  }
+
+  public void balanceTolerance() {
+    m_CanSparkMax.set(0.05f);
   }
  }
