@@ -154,7 +154,7 @@ public final class Constants {
 
     public static final int kIntakeSolenoidForwardChannel = 0;
     public static final int kIntakeSolenoidReverseChannel = 1;
-    public static final int CTREPCM = 15;
+    public static final int CTREPCM = 00;
 
   }
 

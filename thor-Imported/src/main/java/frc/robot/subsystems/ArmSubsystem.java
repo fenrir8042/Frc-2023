@@ -4,8 +4,11 @@
 
 package frc.robot.subsystems;
 
-// import com.revrobotics.CANSparkMax;
-// import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.CANSparkMax.ControlType;
+import com.revrobotics.RelativeEncoder;
+
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.MotControllerJNI;
@@ -14,6 +17,7 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import com.revrobotics.CANSparkMax.ControlType;
 
 import frc.robot.Constants;
 import frc.robot.Constants.ArmConstants;
@@ -21,18 +25,18 @@ import frc.robot.Constants.ArmConstants;
 public class ArmSubsystem extends SubsystemBase {
 
   private WPI_TalonSRX a_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.armTalonPort);
-  private WPI_TalonSRX c_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort1);
-  private WPI_TalonSRX s_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort2);
-  //private CANSparkMax m_CanSparkMax = new CANSparkMax(Constants.ArmConstants.centerSpark, MotorType.kBrushless);
+  // private WPI_TalonSRX c_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort1);
+  // private WPI_TalonSRX s_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort2);
+  private CANSparkMax m_CanSparkMax = new CANSparkMax(Constants.ArmConstants.centerSpark, MotorType.kBrushless);
 
 
-  private final MotorControllerGroup c_ControllerGroup = new MotorControllerGroup(c_TalonSRX, s_TalonSRX);
+  //private final MotorControllerGroup c_ControllerGroup = new MotorControllerGroup(c_TalonSRX, s_TalonSRX);
   
 
   public boolean armupMode;
   public boolean armdownMode;
-  public boolean centerUp;
-  public boolean centerDown;
+  public boolean centerUpMode;
+  public boolean centerDownMode;
 
   /** Creates a new ArmSubsystem. */
   public ArmSubsystem() {
@@ -40,6 +44,11 @@ public class ArmSubsystem extends SubsystemBase {
     armdownMode = false;
     armupMode = false;
     armdownMode = true;
+
+    centerUpMode = true;
+    centerDownMode =false;
+    centerUpMode = false;
+    centerDownMode =true;
   }
 
   @Override
@@ -64,18 +73,18 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void centerUp() {
-    if (centerUp) {
-      c_ControllerGroup.set(1f);
+    if (centerUpMode) {
+      m_CanSparkMax.set(1f);
     } else {
-      c_ControllerGroup.stopMotor();
+      m_CanSparkMax.stopMotor();
     }
   }
 
   public void centerDown() {
-    if (centerDown) {
-      c_ControllerGroup.set(-1f);
+    if (centerDownMode) {
+      m_CanSparkMax.set(-1f);
     } else {
-      c_ControllerGroup.stopMotor();
+      m_CanSparkMax.stopMotor();
     }
   }
  }
