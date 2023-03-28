@@ -16,10 +16,14 @@ public class pneumaticSubsystem extends SubsystemBase {
         Constants.PNEUMATICS.kIntakeSolenoidForwardChannel,
         Constants.PNEUMATICS.kIntakeSolenoidReverseChannel);
 
-    public boolean pneumaticMode;
+    public boolean pushMode;
+    public boolean pullMode;
 
     public pneumaticSubsystem() {
-        pneumaticMode = true;
+        pushMode = true;
+        pullMode = false;
+        pushMode = false;
+        pullMode = true;
     }
 
     @Override
@@ -27,15 +31,15 @@ public class pneumaticSubsystem extends SubsystemBase {
 
     public void pushPneumatic() {
         intake_solenoid.set(DoubleSolenoid.Value.kForward);
-        pneumaticMode = true;
+        pushMode = true;
+        pullMode = false;
       }
     
     public void pullPneumatic() {
         intake_solenoid.set(DoubleSolenoid.Value.kReverse);
-        pneumaticMode = false;
+        pushMode = false;
+        pullMode = true;
       }
-      
-    
                     
 
     

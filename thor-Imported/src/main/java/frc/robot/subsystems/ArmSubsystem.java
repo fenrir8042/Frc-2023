@@ -26,12 +26,12 @@ import frc.robot.Constants.ArmConstants;
 public class ArmSubsystem extends SubsystemBase {
 
   private WPI_TalonSRX a_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.armTalonPort);
-  private WPI_TalonSRX c_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort1);
+  //private WPI_TalonSRX c_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort1);
   // private WPI_TalonSRX s_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort2);
   private CANSparkMax m_CanSparkMax = new CANSparkMax(Constants.ArmConstants.centerSpark, MotorType.kBrushless);
 
 
-  private final MotorControllerGroup c_ControllerGroup = new MotorControllerGroup(c_TalonSRX, m_CanSparkMax);
+  //private final MotorControllerGroup c_ControllerGroup = new MotorControllerGroup(c_TalonSRX, m_CanSparkMax);
   
 
   public boolean armupMode;
@@ -75,21 +75,21 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void centerUp() {
     if (centerUpMode) {
-      c_ControllerGroup.set(0.5f);
+      m_CanSparkMax.set(0.3f);
     } 
   }
 
   public void centerDown() {
     if (centerDownMode) {
-      c_ControllerGroup.set(-0.5f);
+      m_CanSparkMax.set(-0.3f);
     } 
   }
 
   public void stopMotor() {
-    c_ControllerGroup.stopMotor();
+    m_CanSparkMax.stopMotor();
   }
 
   public void balanceTolerance() {
-    c_ControllerGroup.set(0.05f);
+    m_CanSparkMax.set(0.1f);
   }
  }

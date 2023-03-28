@@ -79,8 +79,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
        
-   button5.onTrue(new CenterUp(m_ArmSubsystem,0.5f));
-   button3.onTrue(new CenterDown(m_ArmSubsystem, -0.5f));
+   button5.onTrue(new CenterUp(m_ArmSubsystem,0.3f));
+   button3.onTrue(new CenterDown(m_ArmSubsystem, -03f));
    button7.onTrue(new motorStopCmd(m_ArmSubsystem, 0));
    button8.onTrue(new balanceCmd(m_ArmSubsystem, 0.05f));
 
