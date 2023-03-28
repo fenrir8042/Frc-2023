@@ -61,6 +61,12 @@ public final class Constants {
     
     public static double maxDriveSpeed = 1;
     public static double maxTurnSpeed = 0.8;
+
+    public static final double kPStop = 0;
+    public static final double kIStop = 0;
+    public static final double kDStop = 0;
+
+    
   }
 
   public static class ArmConstants {
