@@ -22,10 +22,6 @@ import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
 
 import java.lang.Math;
-// import edu.wpi.first.wpilibj.DoubleSolenoid;
-// import edu.wpi.first.wpilibj.Compressor;
-// import frc.robot.Constants.PNEUMATICS;
-
 
 
 public class Robot extends TimedRobot {
@@ -37,10 +33,6 @@ XboxController xboxController = new XboxController(1);
 
 
 //pnömatik tanım!!!
-
-// private final DoubleSolenoid m_DoubleSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM,0, 1);
-// private final Compressor m_Compressor = new Compressor(PneumaticsModuleType.CTREPCM);
-
 
   private Command m_autonomousCommand;
 

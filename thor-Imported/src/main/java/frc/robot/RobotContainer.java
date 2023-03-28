@@ -25,7 +25,7 @@ import frc.robot.commands.Arm.motorStopCmd;
 // import frc.robot.commands.Pneumatic.pullMode;
 // import frc.robot.commands.Pneumatic.pushMode;
 import frc.robot.commands.Pneumatic.openCmd;
-import frc.robot.commands.Pneumatic.closeCmd;
+// import frc.robot.commands.Pneumatic.closeCmd;
 import frc.robot.subsystems.ArmSubsystem;
 
 /**
@@ -81,16 +81,16 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
        
-   button5.onTrue(new CenterUp(m_ArmSubsystem,1f));
-   button3.onTrue(new CenterDown(m_ArmSubsystem, -1f));
+   button5.onTrue(new CenterUp(m_ArmSubsystem,0.8f));
+   button3.onTrue(new CenterDown(m_ArmSubsystem, -0.5f));
    button7.onTrue(new motorStopCmd(m_ArmSubsystem, 0));
-   button8.onTrue(new balanceCmd(m_ArmSubsystem, 0.1f));
+   button8.onTrue(new balanceCmd(m_ArmSubsystem, 0.2f));
 
-   button6.whileTrue(new ArmUpCmd(m_ArmSubsystem, 1f));
-   button4.whileTrue(new ArmDownCmd(m_ArmSubsystem, -1f));
+   button6.whileTrue(new ArmUpCmd(m_ArmSubsystem, 0.8f));
+   button4.whileTrue(new ArmDownCmd(m_ArmSubsystem, -0.8f));
 
    button1.whileTrue(new openCmd(m_pneumaticSubsystem));
-   button2.whileTrue(new closeCmd(m_pneumaticSubsystem));
+   //button2.whileTrue(new closeCmd(m_pneumaticSubsystem));
    
 
   }

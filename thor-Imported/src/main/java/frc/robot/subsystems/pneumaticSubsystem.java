@@ -20,26 +20,28 @@ public class pneumaticSubsystem extends SubsystemBase {
     public boolean pullMode;
 
     public pneumaticSubsystem() {
-        pushMode = true;
-        pullMode = false;
-        pushMode = false;
-        pullMode = true;
+ 
     }
 
     @Override
     public void periodic() {}
 
     public void pushPneumatic() {
-        intake_solenoid.set(DoubleSolenoid.Value.kForward);
-        pushMode = true;
-        pullMode = false;
+        
+        if (pushMode = true) {
+            intake_solenoid.set(DoubleSolenoid.Value.kForward);
+        } else if (pushMode = false) {
+            intake_solenoid.set(DoubleSolenoid.Value.kReverse);
+        } else {
+            intake_solenoid.set(DoubleSolenoid.Value.kOff);
+        }
       }
     
-    public void pullPneumatic() {
-        intake_solenoid.set(DoubleSolenoid.Value.kReverse);
-        pushMode = false;
-        pullMode = true;
-      }
+    // public void pullPneumatic() {
+    //     intake_solenoid.set(DoubleSolenoid.Value.kReverse);
+    //     pushMode = false;
+    //     pullMode = true;
+    //   }
                     
 
     

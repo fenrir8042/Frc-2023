@@ -63,7 +63,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void armPush() {
     if (armupMode) {
-      a_TalonSRX.set(1f);
+      a_TalonSRX.set(0.8f);
     } else {
       a_TalonSRX.stopMotor();
     }
@@ -71,7 +71,7 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void armPull() {
     if (armdownMode) {
-      a_TalonSRX.set(-1f);
+      a_TalonSRX.set(-0.8f);
     } else {
       a_TalonSRX.stopMotor();
     }
@@ -79,13 +79,13 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void centerUp() {
     if (centerUpMode) {
-      m_CanSparkMax.set(1f);
+      m_CanSparkMax.set(0.8f);
     } 
   }
 
   public void centerDown() {
     if (centerDownMode) {
-      m_CanSparkMax.set(-1f);
+      m_CanSparkMax.set(-0.3f);
     } 
   }
 
@@ -94,6 +94,6 @@ public class ArmSubsystem extends SubsystemBase {
   }
 
   public void balanceTolerance() {
-    m_CanSparkMax.set(0.1f);
+    m_CanSparkMax.set(0.2f);
   }
  }
