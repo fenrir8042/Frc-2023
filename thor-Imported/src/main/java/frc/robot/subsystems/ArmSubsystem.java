@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.CANSparkMax.ControlType;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.SparkMaxPIDController;
 
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -24,6 +25,10 @@ import frc.robot.Constants;
 import frc.robot.Constants.ArmConstants;
 
 public class ArmSubsystem extends SubsystemBase {
+  private SparkMaxPIDController m_PidController;
+  private RelativeEncoder m_Encoder;
+  public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
+  
 
   private WPI_TalonSRX a_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.armTalonPort);
   //private WPI_TalonSRX c_TalonSRX = new WPI_TalonSRX(Constants.ArmConstants.centerTalonPort1);
@@ -32,7 +37,6 @@ public class ArmSubsystem extends SubsystemBase {
 
 
   //private final MotorControllerGroup c_ControllerGroup = new MotorControllerGroup(c_TalonSRX, m_CanSparkMax);
-  
 
   public boolean armupMode;
   public boolean armdownMode;
@@ -75,13 +79,13 @@ public class ArmSubsystem extends SubsystemBase {
 
   public void centerUp() {
     if (centerUpMode) {
-      m_CanSparkMax.set(0.3f);
+      m_CanSparkMax.set(1f);
     } 
   }
 
   public void centerDown() {
     if (centerDownMode) {
-      m_CanSparkMax.set(-0.3f);
+      m_CanSparkMax.set(-1f);
     } 
   }
 
