@@ -17,6 +17,9 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.DrivetrainConstants;
 
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -41,14 +44,13 @@ public class Robot extends TimedRobot {
 XboxController xboxController = new XboxController(1);
 private DriveTrain mDriveTrain = new DriveTrain();
 
-
 //pnömatik tanım!!!
 
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
 
-  private DriveTrain mecDrive;
+  private DriveTrain drvtrain;
   //private PneumaticsControlModule m_pcm = new PneumaticsControlModule();
   //private Compressor m_Compressor = new Compressor(PneumaticsModuleType.CTREPCM);
 
@@ -84,8 +86,8 @@ private DriveTrain mDriveTrain = new DriveTrain();
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    // timer.reset();
-    // timer.start();
+    timer.reset();
+    timer.start();
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
    
@@ -97,17 +99,10 @@ private DriveTrain mDriveTrain = new DriveTrain();
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    // SmartDashboard.putNumber("Timer: ", timer.get());
-    // System.out.println(timer.get());
-    // if (timer.get() < 4) {
-    //   mDriveTrain.autotaxi();
-    //   System.out.println("autotaxi");
+    double time = timer.getFPGATimestamp();
+
+    if (time < 5){
       
-    // }
-    //   else if (timer.get() <8) {
-    //   mDriveTrain.autostop();
-    //   System.out.println("autostop");
-    // }
 
 
   }
@@ -155,4 +150,4 @@ private DriveTrain mDriveTrain = new DriveTrain();
   @Override
   public void simulationPeriodic() {}
 }
-
+}

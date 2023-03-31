@@ -29,7 +29,7 @@ import frc.robot.commands.Pneumatic.openCmd;
 import frc.robot.commands.Pneumatic.closeCmd;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.commands.AutoCmd;
- import frc.robot.commands.AutoDriveCmd;
+import frc.robot.commands.AutoDriveCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
