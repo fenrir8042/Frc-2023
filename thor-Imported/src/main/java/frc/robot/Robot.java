@@ -3,6 +3,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PneumaticsControlModule;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -18,6 +19,8 @@ import frc.robot.Constants.DrivetrainConstants;
 
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
 
 import org.opencv.core.Mat;
@@ -30,12 +33,13 @@ import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.cameraserver.CameraServer;
 
 
+
 public class Robot extends TimedRobot {
   Timer timer = new Timer(); 
 
 //xbox kontrol
 XboxController xboxController = new XboxController(1);
-
+private DriveTrain mDriveTrain = new DriveTrain();
 
 
 //pnömatik tanım!!!
@@ -45,12 +49,16 @@ XboxController xboxController = new XboxController(1);
   private RobotContainer m_robotContainer;
 
   private DriveTrain mecDrive;
+  //private PneumaticsControlModule m_pcm = new PneumaticsControlModule();
+  //private Compressor m_Compressor = new Compressor(PneumaticsModuleType.CTREPCM);
 
 
   private Object drivetrain;
 //MecanumDrive robot = new MecanumDrive(extentionWheelTalonSRX, rearLeftmotor, frontRightmotor, rearRightmotor);
   @Override
   public void robotInit() {
+    // m_pcm.enableCompressorDigital();
+    // m_Compressor.enableDigital();
     CameraServer.startAutomaticCapture();
     CvSink cvSink = CameraServer.getVideo();
     CvSource outputStream = CameraServer.putVideo("Blur", 640, 480);
@@ -62,6 +70,7 @@ XboxController xboxController = new XboxController(1);
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+    //SmartDashboard.putNumber("Compressor Pressure: ", m_Compressor.getPressure());
 
   }
 
@@ -75,8 +84,8 @@ XboxController xboxController = new XboxController(1);
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    timer.reset();
-    timer.start();
+    // timer.reset();
+    // timer.start();
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
    
@@ -88,12 +97,18 @@ XboxController xboxController = new XboxController(1);
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    if (timer.get() < 3.5) {
-      mecDrive.setMecanum(Constants.DrivetrainConstants.kPVerticalDrive, Constants.DrivetrainConstants.kIHorizontalDrive, Constants.DrivetrainConstants.kDVerticalDrive);
-    }
-      else if (timer.get() < 5) {
-      mecDrive.setMecanum(Constants.DrivetrainConstants.kPStop, Constants.DrivetrainConstants.kIStop, Constants.DrivetrainConstants.kDStop);
-    }
+    // SmartDashboard.putNumber("Timer: ", timer.get());
+    // System.out.println(timer.get());
+    // if (timer.get() < 4) {
+    //   mDriveTrain.autotaxi();
+    //   System.out.println("autotaxi");
+      
+    // }
+    //   else if (timer.get() <8) {
+    //   mDriveTrain.autostop();
+    //   System.out.println("autostop");
+    // }
+
 
   }
 }

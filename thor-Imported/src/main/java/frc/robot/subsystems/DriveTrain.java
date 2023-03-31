@@ -73,4 +73,18 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void simulationPeriodic() {}
+
+  public void autotaxi() {
+    frontLeft.set(-0.5);
+    backLeft.set(-0.5);
+    frontRight.set(-0.5);
+    backRight.set(-0.5);
+  }
+  
+  public void autostop() {
+    frontLeft.set(0);
+    backLeft.set(0);
+    frontRight.set(0);
+    backRight.set(0);
+  }
 }

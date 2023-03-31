@@ -37,11 +37,11 @@ public class pneumaticSubsystem extends SubsystemBase {
         }
       }
     
-    // public void pullPneumatic() {
-    //     intake_solenoid.set(DoubleSolenoid.Value.kReverse);
-    //     pushMode = false;
-    //     pullMode = true;
-    //   }
+    public void pullPneumatic() {
+        intake_solenoid.set(DoubleSolenoid.Value.kReverse);
+        pushMode = false;
+        pullMode = true;
+      }
                     
 
     

@@ -18,6 +18,7 @@ import frc.robot.Constants.OperatorConstants ;
 import frc.robot.Constants.OI;
 import frc.robot.commands.Arm.ArmDownCmd;
 import frc.robot.commands.Arm.ArmUpCmd;
+import frc.robot.commands.Arm.ArmStopCmd;
 import frc.robot.commands.Arm.CenterUp;
 import frc.robot.commands.Arm.CenterDown;
 import frc.robot.commands.Arm.balanceCmd;
@@ -25,8 +26,10 @@ import frc.robot.commands.Arm.motorStopCmd;
 // import frc.robot.commands.Pneumatic.pullMode;
 // import frc.robot.commands.Pneumatic.pushMode;
 import frc.robot.commands.Pneumatic.openCmd;
-// import frc.robot.commands.Pneumatic.closeCmd;
+import frc.robot.commands.Pneumatic.closeCmd;
 import frc.robot.subsystems.ArmSubsystem;
+import frc.robot.commands.AutoCmd;
+ import frc.robot.commands.AutoDriveCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -35,6 +38,7 @@ import frc.robot.subsystems.ArmSubsystem;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+
 
   final DriveTrain driveSubsystem = new DriveTrain();
   final pneumaticSubsystem m_pneumaticSubsystem = new pneumaticSubsystem();
@@ -55,6 +59,7 @@ public class RobotContainer {
   private final JoystickButton button11 = new JoystickButton(stick, Constants.OI.button11);
   private final JoystickButton button12 = new JoystickButton(stick, Constants.OI.button12);
 
+  private final Command autoCommand = new AutoDriveCmd(driveSubsystem);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -82,27 +87,34 @@ public class RobotContainer {
   private void configureButtonBindings() {
        
    button5.onTrue(new CenterUp(m_ArmSubsystem,0.8f));
-   button3.onTrue(new CenterDown(m_ArmSubsystem, -0.5f));
+   button3.onTrue(new CenterDown(m_ArmSubsystem, -0.3f));
    button7.onTrue(new motorStopCmd(m_ArmSubsystem, 0));
    button8.onTrue(new balanceCmd(m_ArmSubsystem, 0.2f));
 
    button6.whileTrue(new ArmUpCmd(m_ArmSubsystem, 0.8f));
    button4.whileTrue(new ArmDownCmd(m_ArmSubsystem, -0.8f));
+   button9.whileTrue(new ArmStopCmd(m_ArmSubsystem, 0));
 
    button1.whileTrue(new openCmd(m_pneumaticSubsystem));
-   //button2.whileTrue(new closeCmd(m_pneumaticSubsystem));
-   
+   button2.whileTrue(new closeCmd(m_pneumaticSubsystem));
+    
 
   }
 
   private void getClass(ArmSubsystem m_ArmSubsystem2) {
   }
 
+  public Command getAutonomousCommand()  {
+
+    return autoCommand;
+  }
+
+}
+
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
    */
-   public Command getAutonomousCommand;  }
-     // An ExampleCommand will run in autonomous
-     
+
+    

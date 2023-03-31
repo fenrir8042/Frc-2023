@@ -48,6 +48,11 @@ public final class Constants {
     public static final double kIVerticalDrive = 0.01;
     public static final double kDVerticalDrive = 0.01;
 
+    // autonomous constants
+    public static final double autoVert = 0.3;
+    public static final double autoHoriz = 0.0;
+    public static final double autoRot = 0.0;
+
     public static final double kPHorizontalDrive = 0.01;
     public static final double kIHorizontalDrive = 0;
     public static final double kDHorizontalDrive = 0;
@@ -158,8 +163,8 @@ public final class Constants {
   
   public static class PNEUMATICS {
 
-    public static final int kIntakeSolenoidForwardChannel = 0;
-    public static final int kIntakeSolenoidReverseChannel = 1;
+    public static final int kIntakeSolenoidForwardChannel = 2;
+    public static final int kIntakeSolenoidReverseChannel = 3;
     public static final int CTREPCM = 00;
 
   }
