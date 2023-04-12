@@ -6,11 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.AutoDriveCmd;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.pneumaticSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.MecanumDriveCmd;
@@ -28,8 +31,8 @@ import frc.robot.commands.Arm.motorStopCmd;
 import frc.robot.commands.Pneumatic.openCmd;
 import frc.robot.commands.Pneumatic.closeCmd;
 import frc.robot.subsystems.ArmSubsystem;
-// import frc.robot.commands.AutoCmd;
-// import frc.robot.commands.AutoDriveCmd;
+import frc.robot.commands.AutoCmd;
+import frc.robot.commands.AutoDriveCmd;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -59,12 +62,14 @@ public class RobotContainer {
   private final JoystickButton button11 = new JoystickButton(stick, Constants.OI.button11);
   private final JoystickButton button12 = new JoystickButton(stick, Constants.OI.button12);
 
-  //private final Command autoCommand = new AutoDriveCmd(driveSubsystem);
+  private final Command AutoCmd = new AutoCmd(driveSubsystem);
+
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
+    CommandScheduler.getInstance().registerSubsystem(driveSubsystem);
    final Joystick stick = new Joystick(Constants.OI.kStickId);
 
     driveSubsystem.setDefaultCommand(
@@ -104,10 +109,11 @@ public class RobotContainer {
   private void getClass(ArmSubsystem m_ArmSubsystem2) {
   }
 
-  // public Command getAutonomousCommand()  {
+  public Command getAutonomousCommand()  {
 
-  //   return autoCommand;
-  // }
+    return AutoCmd;
+    // return new SequentialCommandGroup(new CenterUp(m_ArmSubsystem, 0.8d).withTimeout(1.5d), new openCmd(m_pneumaticSubsystem).withTimeout(1.5d), new CenterDown(m_ArmSubsystem, 0.3d).withTimeout(3.5d), new AutoDriveCmd(driveSubsystem).withTimeout(2));
+  }
 
 }
 

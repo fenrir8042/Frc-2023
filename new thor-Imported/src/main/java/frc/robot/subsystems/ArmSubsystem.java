@@ -81,15 +81,15 @@ public class ArmSubsystem extends SubsystemBase {
     a_TalonSRX.stopMotor();
   }
 
-  public void centerUp() {
+  public void centerUp(double speed) {
     if (centerUpMode) {
-      m_CanSparkMax.set(0.8f);
+      m_CanSparkMax.set(speed);
     } 
   }
 
-  public void centerDown() {
+  public void centerDown(double speed) {
     if (centerDownMode) {
-      m_CanSparkMax.set(-0.3f);
+      m_CanSparkMax.set(-speed);
     } 
   }
 

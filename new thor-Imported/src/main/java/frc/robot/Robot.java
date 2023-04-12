@@ -90,16 +90,16 @@ private DriveTrain mDriveTrain = new DriveTrain();
   @Override
   public void disabledPeriodic() {}
 
-  public class Autonomous extends TimedRobot {
+  // public class Autonomous extends TimedRobot {
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
-    timer.reset();
-    timer.start();
-    //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    // timer.reset();
+    // timer.start();
+   // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
-    startTime = Timer.getFPGATimestamp();
-
+    // startTime = Timer.getFPGATimestamp();
+    m_robotContainer.getAutonomousCommand().schedule();
    
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -109,25 +109,25 @@ private DriveTrain mDriveTrain = new DriveTrain();
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    double time = timer.getFPGATimestamp();
+    // double time = timer.getFPGATimestamp();
 
-    if (time < 3){
-      frontLeft.set(0.6);
-      backLeft.set(0.6);
-      frontRight.set(-0.6);
-      backRight.set(-0.6);
-    }else {
-      frontLeft.set(0);
-      backLeft.set(0);
-      frontRight.set(0);
-      backRight.set(0);
+    // if (timer.get() < 3.5){
+    //   frontLeft.set(0.6);
+    //   backLeft.set(0.6);
+    //   frontRight.set(-0.6);
+    //   backRight.set(-0.6);
+    // }else {
+    //   frontLeft.set(0);
+    //   backLeft.set(0);
+    //   frontRight.set(0);
+    //   backRight.set(0);
       
 
-    }
+    // }
 
 
   }
-}
+
 
   @Override
   public void teleopInit() {

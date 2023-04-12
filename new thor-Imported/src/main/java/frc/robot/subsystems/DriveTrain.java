@@ -13,11 +13,15 @@ import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.DrivetrainConstants;
 import frc.robot.Constants.invert;
 import edu.wpi.first.wpilibj.AnalogGyro;
+import edu.wpi.first.wpilibj.Joystick;
 
 public class DriveTrain extends SubsystemBase {
+
+  Joystick gamepad = new Joystick(Constants.OI.kStickId);
 
   private WPI_VictorSPX frontRight = new WPI_VictorSPX(DrivetrainConstants.frontRightPort);
   private WPI_TalonSRX frontLeft = new WPI_TalonSRX(DrivetrainConstants.frontLeftPort);
@@ -68,23 +72,16 @@ public class DriveTrain extends SubsystemBase {
 
   @Override
   public void periodic() {
-    
   }
 
   @Override
   public void simulationPeriodic() {}
 
-  public void autotaxi() {
-    frontLeft.set(-0.5);
-    backLeft.set(-0.5);
-    frontRight.set(-0.5);
-    backRight.set(-0.5);
-  }
+  // public void autotaxi() {
+  //   frontLeft.set(-0.5);
+  //   backLeft.set(-0.5);
+  //   frontRight.set(-0.5);
+  //   backRight.set(-0.5);
+  // }
   
-  public void autostop() {
-    frontLeft.set(0);
-    backLeft.set(0);
-    frontRight.set(0);
-    backRight.set(0);
-  }
 }
