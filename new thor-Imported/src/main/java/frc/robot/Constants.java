@@ -4,14 +4,6 @@
 
 package frc.robot;
 
-/**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants. This class should not be used for any other purpose. All constants should be declared
- * globally (i.e. public static). Do not put anything functional in this class.
- *
- * <p>It is advised to statically import this class (or one okf its inner classes) wherever the
- * constants are needed, to reduce verbosity.
- */
 public final class Constants {
 
   public static class OI {
@@ -138,17 +130,6 @@ public final class Constants {
     public static final double rotateDeadzone = 0.1;
   }
 
-  // public static class GridConstants {
-  //   public static final int conePlaceTopIncline =
-  //       39; // this is in degrees, this value is from the math we did and it shoud be mostly
-  // correct
-  //   public static final int conePlaceTopExtension = 0;
-
-  //   public static final int cubePlaceTopIncline = 0;
-  //   public static final int cubePlaceTopExtension = 0;
-
-  //   public static final int drop = 0;
-  // }
 
   public static class DriverStationConstants {
 

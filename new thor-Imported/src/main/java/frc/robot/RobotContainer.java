@@ -4,21 +4,14 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.AutoDriveCmd;
-import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.pneumaticSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.MecanumDriveCmd;
 import frc.robot.Constants.OperatorConstants ;
-import frc.robot.Constants.OI;
 import frc.robot.commands.Arm.ArmDownCmd;
 import frc.robot.commands.Arm.ArmUpCmd;
 import frc.robot.commands.Arm.ArmStopCmd;
@@ -26,20 +19,12 @@ import frc.robot.commands.Arm.CenterUp;
 import frc.robot.commands.Arm.CenterDown;
 import frc.robot.commands.Arm.balanceCmd;
 import frc.robot.commands.Arm.motorStopCmd;
-// import frc.robot.commands.Pneumatic.pullMode;
-// import frc.robot.commands.Pneumatic.pushMode;
 import frc.robot.commands.Pneumatic.openCmd;
 import frc.robot.commands.Pneumatic.closeCmd;
 import frc.robot.subsystems.ArmSubsystem;
 import frc.robot.commands.AutoCmd;
-import frc.robot.commands.AutoDriveCmd;
 
-/**
- * This class is where the bulk of the robot should be declared. Since Command-based is a
- * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
- * periodic methods (other than the scheduler calls). Instead, the structure of the robot (including
- * subsystems, commands, and button mappings) should be declared here.
- */
+
 public class RobotContainer {
 
 
@@ -64,9 +49,6 @@ public class RobotContainer {
 
   private final Command AutoCmd = new AutoCmd(driveSubsystem);
 
-
-
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
     CommandScheduler.getInstance().registerSubsystem(driveSubsystem);
@@ -83,12 +65,6 @@ public class RobotContainer {
     configureButtonBindings();
   }
 
-  /**
-   * Use this method to define your button->command mappings. Buttons can be created by
-   * instantiating a {@link GenericHID} or one of its subclasses ({@link
-   * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
-   * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
-   */
   private void configureButtonBindings() {
        
    button5.onTrue(new CenterUp(m_ArmSubsystem,0.8f));
@@ -112,15 +88,8 @@ public class RobotContainer {
   public Command getAutonomousCommand()  {
 
     return AutoCmd;
-    // return new SequentialCommandGroup(new CenterUp(m_ArmSubsystem, 0.8d).withTimeout(1.5d), new openCmd(m_pneumaticSubsystem).withTimeout(1.5d), new CenterDown(m_ArmSubsystem, 0.3d).withTimeout(3.5d), new AutoDriveCmd(driveSubsystem).withTimeout(2));
   }
 
 }
-
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
 
     
